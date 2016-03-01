@@ -1,0 +1,37 @@
+.tab-view {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  &-tab {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+  }
+
+  &-tab-set {
+    display: flex;
+    flex: none !important;
+    background-color: #ccc;
+    overflow: hidden;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #ccc;
+
+    &-tab {
+      cursor: pointer;
+      user-select: none;
+      margin-top: 6px;
+      margin-left: 8px;
+      padding: 8px 15px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      background: linear-gradient(#ffffff, #e1e1e1);
+
+      &.active {
+        background: none;
+        background-color: white;
+        box-shadow: none;
+      }
+    }
+  }
+}

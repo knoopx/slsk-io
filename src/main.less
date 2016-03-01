@@ -1,0 +1,44 @@
+@import "font-awesome/less/variables";
+@fa-font-path: "../node_modules/font-awesome/fonts";
+@import "font-awesome/less/mixins";
+@import "font-awesome/less/path";
+@import "font-awesome/less/core";
+@import "font-awesome/less/larger";
+@import "font-awesome/less/list";
+@import "font-awesome/less/animated";
+@import "font-awesome/less/stacked";
+@import "font-awesome/less/icons";
+
+@import "ui";
+
+*,
+:before,
+:after {
+  box-sizing: border-box;
+}
+
+* {
+  outline: none !important;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.app, #root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#root {
+  flex: 1;
+}

@@ -1,0 +1,17 @@
+.list {
+  flex: 1;
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 15px;
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    & + & {
+      border-top: 1px solid #eee;
+    }
+  }
+}
