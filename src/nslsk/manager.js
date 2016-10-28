@@ -75,9 +75,7 @@ Manager.prototype.onPriviledgedUsers = function (message) {
  * @param {Message} message
  */
 
-Manager.prototype.onGetStatus = function (message) {
-
-}
+Manager.prototype.onGetStatus = function (message) {}
 
 /**
  * @param {Message} message

@@ -16,6 +16,14 @@ export default class extends React.Component {
   static displayName = 'TransfersPanel'
 
   render() {
-    return <Row flex={2.0}><Column><Toolbar>Downloads</Toolbar></Column><Divider vertical /><Column><Toolbar>Uploads</Toolbar></Column></Row>
+    return (<Row flex={2.0}>
+      <Column>
+        <Toolbar>Downloads</Toolbar>
+      </Column>
+      <Divider vertical />
+      <Column>
+        <Toolbar>Uploads</Toolbar>
+      </Column>
+    </Row>)
   }
 }

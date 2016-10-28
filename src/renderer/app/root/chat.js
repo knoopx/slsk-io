@@ -22,15 +22,20 @@ export default class extends React.Component {
   static displayName = 'Chat'
 
   render() {
-    return <List>{this.props.messages.map(this.renderMessage)}</List>
+    return (<List>
+      { this.props.messages.map(this.renderMessage) }
+    </List>)
   }
 
   renderMessage = (message, index) => {
-    return (<ListItem key={index}><Row><Column
-      flex="2"
-      style={{
-        textAlign: 'right'
-      }}
-    ><strong>{message.username}</strong></Column><Gutter /><Column flex="10">{message.message}</Column></Row></ListItem>)
+    return (<ListItem key={index}>
+      <Row>
+        <Column flex="2" style={{ textAlign: 'right' }}><strong>{ message.username }</strong></Column>
+        <Gutter />
+        <Column flex="10">
+          { message.message }
+        </Column>
+      </Row>
+    </ListItem>)
   }
 }

@@ -28,10 +28,6 @@ export default React.createClass({
   },
 
   render() {
-    return (<div
-      className="column"
-      {...this.props}
-      style={Object.merge(this.getStyle(), this.props.style)}
-    />)
+    return (<div className="column" {...this.props} style={Object.merge(this.getStyle(), this.props.style)} />)
   }
 })

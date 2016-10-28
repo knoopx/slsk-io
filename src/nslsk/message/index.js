@@ -50,7 +50,7 @@ function Message(buffers) {
   }
 
   if (Object.prototype.toString.call(buffers) === '[object Number]') {
-    this.uint32(buffers)  // code
+    this.uint32(buffers) // code
   }
 }
 

@@ -24,6 +24,20 @@ export default class extends React.Component {
   static displayName = 'UsersPanel'
 
   render() {
-    return <Column><Toolbar><Row alignItems="center"><Column><span>Users ({this.props.users.count()})</span></Column><Button><i className="fa fa-plus" /></Button></Row></Toolbar><ScrollView><List>{this.props.users.sort().map(user => <ListItem key={user}>{user}</ListItem>)}</List></ScrollView></Column>
+    return (<Column>
+      <Toolbar>
+        <Row alignItems="center">
+          <Column><span>Users ({ this.props.users.count() })</span></Column>
+          <Button><i className="fa fa-plus" /></Button>
+        </Row>
+      </Toolbar>
+      <ScrollView>
+        <List>
+          { this.props.users.sort().map(user => <ListItem key={user}>
+            { user }
+          </ListItem>) }
+        </List>
+      </ScrollView>
+    </Column>)
   }
 }

@@ -46,15 +46,23 @@ export default class extends React.Component {
   }
 
   render() {
-    return <Column><Toolbar>Rooms ({this.state.rooms.count()})</Toolbar><ScrollView><List>{this.state.rooms.sortBy(r => -r.users).map(this.renderItem)}</List></ScrollView></Column>
+    return (<Column>
+      <Toolbar>Rooms (
+        { this.state.rooms.count() })</Toolbar>
+      <ScrollView>
+        <List>
+          { this.state.rooms.sortBy(r => -r.users).map(this.renderItem) }
+        </List>
+      </ScrollView>
+    </Column>)
   }
 
   renderItem = (room) => {
-    return (<ListItem
-      key={room.name}
-      onClick={() => {
-        return this.props.onSelect(room)
-      }}
-    >{room.name} ({room.users})</ListItem>)
+    return (<ListItem key={room.name} onClick={() => {
+      return this.props.onSelect(room)
+    }}
+    >
+      { room.name } (
+      { room.users })</ListItem>)
   }
 }

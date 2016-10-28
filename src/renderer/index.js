@@ -3,6 +3,4 @@ import ReactDOM from 'react-dom'
 import App from './app'
 import state from './state'
 
-const app = <App state={state} />
-
-ReactDOM.render(app, document.querySelector('#root'))
+ReactDOM.render(<App state={state} />, document.querySelector('#root'))

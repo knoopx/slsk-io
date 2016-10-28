@@ -63,8 +63,9 @@ Client.prototype.login = function (username, password) {
  */
 
 Client.prototype.fileSearch = function (query, ticket) {
-  if (ticket == null)
-    { ticket = crypto.randomBytes(4).readUInt32LE() }
+  if (ticket == null) {
+    ticket = crypto.randomBytes(4).readUInt32LE()
+  }
 
   message(26)
     .int32(ticket)

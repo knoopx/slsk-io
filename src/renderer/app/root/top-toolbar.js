@@ -21,7 +21,20 @@ export default class extends React.Component {
   }
 
   render() {
-    return <Toolbar><Column><div className="input-group"><i className="fa fa-search" /><Gutter /><input placeholder="Search" onKeyDown={this.onKeyDown} /></div></Column><Gutter size={15.0} /><Button>{this.props.isConnected ? 'Connected' : 'Disconnected'}</Button><Gutter size={5.0} /><Button><i className="fa fa-cog" /></Button></Toolbar>
+    return (<Toolbar>
+      <Column>
+        <div className="input-group"><i className="fa fa-search" />
+          <Gutter />
+          <input placeholder="Search" onKeyDown={this.onKeyDown} />
+        </div>
+      </Column>
+      <Gutter size={15.0} />
+      <Button>
+        { this.props.isConnected ? 'Connected' : 'Disconnected' }
+      </Button>
+      <Gutter size={5.0} />
+      <Button><i className="fa fa-cog" /></Button>
+    </Toolbar>)
   }
 
   onKeyDown = (e) => {

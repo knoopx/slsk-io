@@ -74,24 +74,80 @@ export default class extends React.Component {
       case 'chatroom':
         const room = this.state.joinedRooms.get(props.name)
 
-        var title = <Row><i className="fa fa-hashtag" /><Gutter /><i /><span>{room.name} ({room.users.count()})</span></Row>
+        var title = (<Row><i className="fa fa-hashtag" />
+          <Gutter /><i /><span>{ room.name } ({ room.users.count() })</span></Row>)
 
-        return <Tab key={index} title={title}><Row><Column flex="3"><ScrollView><List>{room.users.sortBy(u => u.user).map(user => <ListItem key={user.user}><span><strong>{user.user}</strong><br /><small className="text-muted">{user.tickers}</small></span></ListItem>)}</List></ScrollView></Column><Divider vertical /><Column flex="9"><ScrollView><Chat messages={room.messages} /></ScrollView></Column></Row></Tab>
+        return (<Tab key={index} title={title}>
+          <Row>
+            <Column flex="3">
+              <ScrollView>
+                <List>
+                  { room.users.sortBy(u => u.user).map(user => <ListItem key={user.user}><span><strong>{ user.user }</strong><br /><small className="text-muted">{ user.tickers }</small></span></ListItem>) }
+                </List>
+              </ScrollView>
+            </Column>
+            <Divider vertical />
+            <Column flex="9">
+              <ScrollView>
+                <Chat messages={room.messages} />
+              </ScrollView>
+            </Column>
+          </Row>
+        </Tab>)
       case 'search':
         const matches = this.state.searches.get(props.ticket)
 
         const renderMatch = function (match, index) {
-          return match.results.map((r, index) => <tr key={index}><td><strong>{match.user}</strong></td><td>{Path.basename(r.filename.replace(/\\/g, '/'))}</td><td>{Path.dirname(r.filename.replace(/\\/g, '/'))}</td><td>{r.size}</td></tr>)
+          return match.results.map((r, index) => <tr key={index}>
+            <td><strong>{ match.user }</strong></td>
+            <td>
+              { Path.basename(r.filename.replace(/\\/g, '/')) }
+            </td>
+            <td>
+              { Path.dirname(r.filename.replace(/\\/g, '/')) }
+            </td>
+            <td>
+              { r.size }
+            </td>
+          </tr>)
         }
 
-        var title = <Row><i className="fa fa-search" /><Gutter /><span>{props.query} ({matches.map(m => m.results.length).toArray().sum()})</span></Row>
+        var title = (<Row><i className="fa fa-search" />
+          <Gutter /><span>{ props.query } ({ matches.map(m => m.results.length).toArray().sum() })</span></Row>)
 
-        return <Tab key={index} title={title}><ScrollView><table>{matches.map(renderMatch)}</table></ScrollView></Tab>
+        return (<Tab key={index} title={title}>
+          <ScrollView>
+            <table>
+              { matches.map(renderMatch) }
+            </table>
+          </ScrollView>
+        </Tab>)
     }
   }
 
   render() {
-    return <AppContainer><Column><TopToolbar isConnected={this.state.isConnected} onSearch={this.performSearch} /><Row><Column flex={9.0}><Row flex={10.0}><TabSet>{this.state.tabs.map(this.renderTab)}</TabSet></Row><Divider /></Column><Divider vertical /><Column flex={3.0}><UsersPanel users={this.state.users} /><Divider /><RoomPanel rooms={this.state.rooms} onSelect={this.joinRoom} /></Column></Row><TransfersPanel /></Column></AppContainer>
+    return (<AppContainer>
+      <Column>
+        <TopToolbar isConnected={this.state.isConnected} onSearch={this.performSearch} />
+        <Row>
+          <Column flex={9.0}>
+            <Row flex={10.0}>
+              <TabSet>
+                { this.state.tabs.map(this.renderTab) }
+              </TabSet>
+            </Row>
+            <Divider />
+          </Column>
+          <Divider vertical />
+          <Column flex={3.0}>
+            <UsersPanel users={this.state.users} />
+            <Divider />
+            <RoomPanel rooms={this.state.rooms} onSelect={this.joinRoom} />
+          </Column>
+        </Row>
+        <TransfersPanel />
+      </Column>
+    </AppContainer>)
   }
 
   onConnected = (client) => {
@@ -132,7 +188,8 @@ export default class extends React.Component {
     }))
   }
 
-  onJoinRoom = (reply) => {}
+  onJoinRoom = (reply) => {
+  }
 
   onRoomTickers = (reply) => {
     return this.setState(state => ({
@@ -140,7 +197,8 @@ export default class extends React.Component {
     }))
   }
 
-  onGetUserStats = (reply) => {}
+  onGetUserStats = (reply) => {
+  }
 
   onLogin = (payload) => {
     return this.setState({
@@ -148,7 +206,8 @@ export default class extends React.Component {
     })
   }
 
-  onGetStatus = (reply) => {}
+  onGetStatus = (reply) => {
+  }
 
   onPriviledgedUsers = (reply) => {
     return this.setState({
@@ -156,8 +215,10 @@ export default class extends React.Component {
     })
   }
 
-  onPrivateMessages = (reply) => {}
-  onUserJoinedRoom = (reply) => {}
+  onPrivateMessages = (reply) => {
+  }
+  onUserJoinedRoom = (reply) => {
+  }
 
   onConnectToPeer = (reply) => {
     return this.state.manager.peers[reply.username].on('search reply', this.onSearchReply)
