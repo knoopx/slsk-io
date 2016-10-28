@@ -20,8 +20,8 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 const ScrollView = UI.View.ScrollView;
 const Button = UI.Buttons.Button;
 
-export default React.createClass({
-  displayName: "UsersPanel",
+export default class extends React.Component {
+  static displayName = "UsersPanel";
 
   render() {
     return React.createElement(Column, null, React.createElement(Toolbar, null, React.createElement(
@@ -43,5 +43,5 @@ export default React.createClass({
       },
       user,
     )))));
-  },
-});
+  }
+};

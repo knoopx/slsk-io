@@ -38,14 +38,15 @@ ref3 = require("./app/root"), TopToolbar = ref3.TopToolbar, TransfersPanel = ref
 
 import support from "./support";
 
-export default React.createClass({
-  displayName: "App",
+export default class extends React.Component {
+  static displayName = "App";
+  state = window.previousAppState || this.props.state;
 
-  pushTab(tab, fn) {
+  pushTab = (tab, fn) => {
     return this.setState(state => ({
       tabs: state.tabs.concat(tab),
     }), fn);
-  },
+  };
 
   componentDidMount() {
     if (typeof module.onReload === "function") {
@@ -66,13 +67,9 @@ export default React.createClass({
     this.state.manager.client.on('say in chat room', this.onSayInChatRoom);
     this.state.manager.client.on('user left room', this.onUserLeftRoom);
     return this.state.manager.client.on('get user stats', this.onGetUserStats);
-  },
+  }
 
-  getInitialState() {
-    return window.previousAppState || this.props.state;
-  },
-
-  renderTab(props, index) {
+  renderTab = (props, index) => {
     switch (props.type) {
       case "chatroom":
         const room = this.state.joinedRooms.get(props.name);
@@ -158,7 +155,7 @@ export default React.createClass({
           React.createElement(ScrollView, null, React.createElement("table", null, matches.map(renderMatch))),
         );
     }
-  },
+  };
 
   render() {
     return React.createElement(Column, null, React.createElement(
@@ -205,16 +202,16 @@ export default React.createClass({
         },
       ),
     )), React.createElement(TransfersPanel, null));
-  },
+  }
 
-  onConnected(client) {
+  onConnected = (client) => {
     this.setState({
       isConnected: true,
     });
     return this.state.manager.client.login(process.env["USERNAME"], process.env["PASSWORD"]);
-  },
+  };
 
-  onSayInChatRoom(reply) {
+  onSayInChatRoom = (reply) => {
     return this.setState(state => ({
       joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
         type: "message",
@@ -223,9 +220,9 @@ export default React.createClass({
         timestamp: Date.now(),
       }))),
     }));
-  },
+  };
 
-  onUserJoinedRoom(reply) {
+  onUserJoinedRoom = (reply) => {
     return this.setState(state => ({
       joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
         type: "joined",
@@ -233,9 +230,9 @@ export default React.createClass({
         timestamp: Date.now(),
       }))),
     }));
-  },
+  };
 
-  onUserLeftRoom(reply) {
+  onUserLeftRoom = (reply) => {
     return this.setState(state => ({
       joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
         type: "left",
@@ -243,52 +240,52 @@ export default React.createClass({
         timestamp: Date.now(),
       }))),
     }));
-  },
+  };
 
-  onJoinRoom(reply) {},
+  onJoinRoom = (reply) => {};
 
-  onRoomTickers(reply) {
+  onRoomTickers = (reply) => {
     return this.setState(state => ({
       joinedRooms: state.joinedRooms.update(reply.room, room => room.set("users", reply.users)),
     }));
-  },
+  };
 
-  onGetUserStats(reply) {},
+  onGetUserStats = (reply) => {};
 
-  onLogin(payload) {
+  onLogin = (payload) => {
     return this.setState({
       isLoggedIn: payload.success,
     });
-  },
+  };
 
-  onGetStatus(reply) {},
+  onGetStatus = (reply) => {};
 
-  onPriviledgedUsers(reply) {
+  onPriviledgedUsers = (reply) => {
     return this.setState({
       users: Immutable.List(reply.users),
     });
-  },
+  };
 
-  onPrivateMessages(reply) {},
-  onUserJoinedRoom(reply) {},
+  onPrivateMessages = (reply) => {};
+  onUserJoinedRoom = (reply) => {};
 
-  onConnectToPeer(reply) {
+  onConnectToPeer = (reply) => {
     return this.state.manager.peers[reply.username].on('search reply', this.onSearchReply);
-  },
+  };
 
-  onSearchReply(reply) {
+  onSearchReply = (reply) => {
     return this.setState(state => ({
       searches: state.searches.update(reply.ticket, matches => (matches != null ? matches.push(reply) : void 0)),
     }));
-  },
+  };
 
-  onRoomList(rooms) {
+  onRoomList = (rooms) => {
     return this.setState({
       rooms: Immutable.List(rooms),
     });
-  },
+  };
 
-  performSearch(query) {
+  performSearch = (query) => {
     const ticket = support.ticket();
     return this.setState(state => ({
       searches: state.searches.set(ticket, Immutable.List()),
@@ -300,9 +297,9 @@ export default React.createClass({
       });
       return this.state.manager.client.fileSearch(query, ticket);
     });
-  },
+  };
 
-  joinRoom(room) {
+  joinRoom = (room) => {
     if (!this.state.joinedRooms.get(room.name)) {
       return this.setState(state => ({
         joinedRooms: state.joinedRooms.set(room.name, new Immutable.Record({
@@ -318,5 +315,5 @@ export default React.createClass({
         return this.state.manager.client.joinRoom(room.name);
       });
     }
-  },
-});
+  };
+};

@@ -12,8 +12,8 @@ const Toolbar = UI.Toolbar;
 
 ref = UI.Layout, Row = ref.Row, Column = ref.Column, Divider = ref.Divider, Gutter = ref.Gutter;
 
-export default React.createClass({
-  displayName: "TransfersPanel",
+export default class extends React.Component {
+  static displayName = "TransfersPanel";
 
   render() {
     return React.createElement(
@@ -30,5 +30,5 @@ export default React.createClass({
       ),
       React.createElement(Column, null, React.createElement(Toolbar, null, "Uploads")),
     );
-  },
-});
+  }
+};

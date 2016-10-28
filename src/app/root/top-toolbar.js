@@ -13,12 +13,12 @@ const Button = UI.Buttons.Button;
 
 ref = UI.Layout, Row = ref.Row, Column = ref.Column, Divider = ref.Divider, Gutter = ref.Gutter;
 
-export default React.createClass({
-  displayName: "TopToolbar",
+export default class extends React.Component {
+  static displayName = "TopToolbar";
 
-  propTypes: {
+  static propTypes = {
     isConnected: React.PropTypes.bool,
-  },
+  };
 
   render() {
     return React.createElement(Toolbar, null, React.createElement(Column, null, React.createElement(
@@ -56,9 +56,9 @@ export default React.createClass({
         className: "fa fa-cog",
       },
     )));
-  },
+  }
 
-  onKeyDown(e) {
+  onKeyDown = (e) => {
     if (!e.defaultPrevented) {
       switch (e.key) {
         case "Enter":
@@ -67,5 +67,5 @@ export default React.createClass({
           return e.preventDefault();
       }
     }
-  },
-});
+  };
+};

@@ -1,32 +1,30 @@
 import React from "react";
 import classNames from "classnames";
 
-export default React.createClass({
-  displayName: "TabSet",
+export default class extends React.Component {
+  static displayName = "TabSet";
+
+  state = window.previousTabSetState || {
+    activeIndex: -1,
+  };
 
   componentDidMount() {
     return typeof module.onReload === "function" ? module.onReload(() => {
       return window.previousTabSetState = this.state;
     }) : void 0;
-  },
-
-  getInitialState() {
-    return window.previousTabSetState || {
-      activeIndex: -1,
-    };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.state.activeIndex === -1 && nextProps.children.length > 0) {
       return this.setActiveIndex(0);
     }
-  },
+  }
 
-  setActiveIndex(index) {
+  setActiveIndex = (index) => {
     return this.setState({
       activeIndex: index,
     });
-  },
+  };
 
   render() {
     return React.createElement(
@@ -43,9 +41,9 @@ export default React.createClass({
       ),
       this.props.children[this.state.activeIndex],
     );
-  },
+  }
 
-  renderTab(tab, index) {
+  renderTab = (tab, index) => {
     return React.createElement(
       "a",
       {
@@ -64,5 +62,5 @@ export default React.createClass({
       },
       tab.props.title,
     );
-  },
-});
+  };
+};

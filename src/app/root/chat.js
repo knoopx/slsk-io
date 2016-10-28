@@ -18,14 +18,14 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 
 const ScrollView = UI.View.ScrollView;
 
-export default React.createClass({
-  displayName: "Chat",
+export default class extends React.Component {
+  static displayName = "Chat";
 
   render() {
     return React.createElement(List, null, this.props.messages.map(this.renderMessage));
-  },
+  }
 
-  renderMessage(message, index) {
+  renderMessage = (message, index) => {
     return React.createElement(
       ListItem,
       {
@@ -49,5 +49,5 @@ export default React.createClass({
         message.message,
       )),
     );
-  },
-});
+  };
+};

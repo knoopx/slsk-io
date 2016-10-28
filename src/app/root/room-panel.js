@@ -21,37 +21,35 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 
 const ScrollView = UI.View.ScrollView;
 
-export default React.createClass({
-  displayName: "RoomPanel",
+export default class extends React.Component {
+  static displayName = "RoomPanel";
 
-  propTypes: {
+  static propTypes = {
     rooms: ImmutablePropTypes.list,
     onSelect: React.PropTypes.func,
-  },
+  };
 
-  getInitialState() {
-    return {
-      rooms: this.props.rooms,
-    };
-  },
+  state = {
+    rooms: this.props.rooms,
+  };
 
   componentWillReceiveProps(nextProps) {
     return this.setRooms(nextProps.rooms);
-  },
+  }
 
-  setRooms(rooms, fn) {
+  setRooms = (rooms, fn) => {
     if (rooms != null) {
       return this.setState({
         rooms,
       }, fn);
     }
-  },
+  };
 
   render() {
     return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(r => -r.users).map(this.renderItem))));
-  },
+  }
 
-  renderItem(room) {
+  renderItem = (room) => {
     return React.createElement(
       ListItem,
       {
@@ -66,5 +64,5 @@ export default React.createClass({
       room.users,
       ")",
     );
-  },
-});
+  };
+};

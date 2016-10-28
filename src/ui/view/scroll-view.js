@@ -16,8 +16,8 @@ const style = {
   },
 };
 
-export default React.createClass({
-  displayName: "ScrollView",
+export default class extends React.Component {
+  static displayName = "ScrollView";
 
   render() {
     return React.createElement(
@@ -33,5 +33,5 @@ export default React.createClass({
         this.props.children,
       ),
     );
-  },
-});
+  }
+};
