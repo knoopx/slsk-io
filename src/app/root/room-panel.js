@@ -35,9 +35,7 @@ export default React.createClass({
     }
   },
   render() {
-    return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(function(r) {
-      return -r.users;
-    }).map(this.renderItem))));
+    return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(r => -r.users).map(this.renderItem))));
   },
   renderItem(room) {
     return React.createElement(ListItem, {

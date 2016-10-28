@@ -61,7 +61,7 @@ Node.prototype.bind = function(socket) {
     , remain = 0
     , buffers = new Buffers();
   
-  socket.on('data', function(data) {
+  socket.on('data', data => {
     debug('[%s] data: %s:%s (%s bytes received)', self.type, socket.remoteAddress, socket.remotePort, data.length);
     buffers.push(data);
     
@@ -71,7 +71,7 @@ Node.prototype.bind = function(socket) {
     
     var message = new Message(buffers.splice(0, remain));
     
-    message.decode(self.type, function(err, decoded) {
+    message.decode(self.type, (err, decoded) => {
       // TODO: handle error.
       decoded._message = message;
       self.emit('message', decoded);
@@ -81,22 +81,22 @@ Node.prototype.bind = function(socket) {
     remain = 0;
   });
   
-  socket.on('connect', function() {
+  socket.on('connect', () => {
     debug('[%s] connect: %s:%s', self.type, socket.remoteAddress, socket.remotePort);
     self.emit('connect', self);
   });
   
-  socket.on('close', function() {
+  socket.on('close', () => {
     debug('[%s] close: %s:%s', self.type, socket.remoteAddress, socket.remotePort);
     self.emit.apply(self, ['close'].concat([].slice.call(arguments)));
   });
   
-  socket.on('timeout', function() {
+  socket.on('timeout', () => {
     debug('[%s] timeout: %s:%s', self.type, socket.remoteAddress, socket.remotePort);
     self.emit.apply(self, ['timeout'].concat(arguments));
   });
   
-  socket.on('error', function() {
+  socket.on('error', () => {
     debug('[%s] error: %s:%s', self.type, socket.remoteAddress, socket.remotePort);
     self.emit.apply(self, ['error'].concat([].slice.call(arguments)));
   });

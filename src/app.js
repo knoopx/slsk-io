@@ -22,11 +22,9 @@ import support from "./support";
 export default React.createClass({
   displayName: "App",
   pushTab(tab, fn) {
-    return this.setState(function(state) {
-      return {
-        tabs: state.tabs.concat(tab)
-      };
-    }, fn);
+    return this.setState(state => ({
+      tabs: state.tabs.concat(tab)
+    }), fn);
   },
   componentDidMount() {
     if (typeof module.onReload === "function") {
@@ -65,15 +63,11 @@ export default React.createClass({
           "title": title
         }, React.createElement(Row, null, React.createElement(Column, {
           "flex": "3"
-        }, React.createElement(ScrollView, null, React.createElement(List, null, room.users.sortBy(function(u) {
-          return u.user;
-        }).map(function(user) {
-          return React.createElement(ListItem, {
-            "key": user.user
-          }, React.createElement("span", null, React.createElement("strong", null, user.user), React.createElement("br", null), React.createElement("small", {
-            "className": "text-muted"
-          }, user.tickers)));
-        })))), React.createElement(Divider, {
+        }, React.createElement(ScrollView, null, React.createElement(List, null, room.users.sortBy(u => u.user).map(user => React.createElement(ListItem, {
+          "key": user.user
+        }, React.createElement("span", null, React.createElement("strong", null, user.user), React.createElement("br", null), React.createElement("small", {
+          "className": "text-muted"
+        }, user.tickers))))))), React.createElement(Divider, {
           "vertical": true
         }), React.createElement(Column, {
           "flex": "9"
@@ -84,18 +78,14 @@ export default React.createClass({
         var matches = this.state.searches.get(props.ticket);
 
         var renderMatch = function(match, index) {
-          return match.results.map(function(r, index) {
-            return React.createElement("tr", {
-              "key": index
-            }, React.createElement("td", null, React.createElement("strong", null, match.user)), React.createElement("td", null, Path.basename(r.filename.replace(/\\/g, "/"))), React.createElement("td", null, Path.dirname(r.filename.replace(/\\/g, "/"))), React.createElement("td", null, r.size));
-          });
+          return match.results.map((r, index) => React.createElement("tr", {
+            "key": index
+          }, React.createElement("td", null, React.createElement("strong", null, match.user)), React.createElement("td", null, Path.basename(r.filename.replace(/\\/g, "/"))), React.createElement("td", null, Path.dirname(r.filename.replace(/\\/g, "/"))), React.createElement("td", null, r.size)));
         };
 
         var title = React.createElement(Row, null, React.createElement("i", {
           "className": "fa fa-search"
-        }), React.createElement(Gutter, null), React.createElement("span", null, props.query, " (", matches.map(function(m) {
-          return m.results.length;
-        }).toArray().sum(), ")"));
+        }), React.createElement(Gutter, null), React.createElement("span", null, props.query, " (", matches.map(m => m.results.length).toArray().sum(), ")"));
 
         return React.createElement(Tab, {
           "key": index,
@@ -129,60 +119,38 @@ export default React.createClass({
     return this.state.manager.client.login(process.env["USERNAME"], process.env["PASSWORD"]);
   },
   onSayInChatRoom(reply) {
-    return this.setState(function(state) {
-      return {
-        joinedRooms: state.joinedRooms.update(reply.room, function(room) {
-          return room.update("messages", function(messages) {
-            return messages.push({
-              type: "message",
-              username: reply.username,
-              message: reply.message,
-              timestamp: Date.now()
-            });
-          });
-        })
-      };
-    });
+    return this.setState(state => ({
+      joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
+        type: "message",
+        username: reply.username,
+        message: reply.message,
+        timestamp: Date.now()
+      })))
+    }));
   },
   onUserJoinedRoom(reply) {
-    return this.setState(function(state) {
-      return {
-        joinedRooms: state.joinedRooms.update(reply.room, function(room) {
-          return room.update("messages", function(messages) {
-            return messages.push({
-              type: "joined",
-              username: reply.username,
-              timestamp: Date.now()
-            });
-          });
-        })
-      };
-    });
+    return this.setState(state => ({
+      joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
+        type: "joined",
+        username: reply.username,
+        timestamp: Date.now()
+      })))
+    }));
   },
   onUserLeftRoom(reply) {
-    return this.setState(function(state) {
-      return {
-        joinedRooms: state.joinedRooms.update(reply.room, function(room) {
-          return room.update("messages", function(messages) {
-            return messages.push({
-              type: "left",
-              username: reply.username,
-              timestamp: Date.now()
-            });
-          });
-        })
-      };
-    });
+    return this.setState(state => ({
+      joinedRooms: state.joinedRooms.update(reply.room, room => room.update("messages", messages => messages.push({
+        type: "left",
+        username: reply.username,
+        timestamp: Date.now()
+      })))
+    }));
   },
   onJoinRoom(reply) {},
   onRoomTickers(reply) {
-    return this.setState(function(state) {
-      return {
-        joinedRooms: state.joinedRooms.update(reply.room, function(room) {
-          return room.set("users", reply.users);
-        })
-      };
-    });
+    return this.setState(state => ({
+      joinedRooms: state.joinedRooms.update(reply.room, room => room.set("users", reply.users))
+    }));
   },
   onGetUserStats(reply) {},
   onLogin(payload) {
@@ -202,13 +170,9 @@ export default React.createClass({
     return this.state.manager.peers[reply.username].on('search reply', this.onSearchReply);
   },
   onSearchReply(reply) {
-    return this.setState(function(state) {
-      return {
-        searches: state.searches.update(reply.ticket, function(matches) {
-          return matches != null ? matches.push(reply) : void 0;
-        })
-      };
-    });
+    return this.setState(state => ({
+      searches: state.searches.update(reply.ticket, matches => (matches != null ? matches.push(reply) : void 0))
+    }));
   },
   onRoomList(rooms) {
     return this.setState({
@@ -217,11 +181,9 @@ export default React.createClass({
   },
   performSearch(query) {
     var ticket = support.ticket();
-    return this.setState(function(state) {
-      return {
-        searches: state.searches.set(ticket, Immutable.List())
-      };
-    }, () => {
+    return this.setState(state => ({
+      searches: state.searches.set(ticket, Immutable.List())
+    }), () => {
       this.pushTab({
         type: "search",
         ticket: ticket,
@@ -232,15 +194,13 @@ export default React.createClass({
   },
   joinRoom(room) {
     if (!this.state.joinedRooms.get(room.name)) {
-      return this.setState(function(state) {
-        return {
-          joinedRooms: state.joinedRooms.set(room.name, new Immutable.Record({
-            name: room.name,
-            messages: Immutable.List(),
-            users: Immutable.Map()
-          })())
-        };
-      }, () => {
+      return this.setState(state => ({
+        joinedRooms: state.joinedRooms.set(room.name, new Immutable.Record({
+          name: room.name,
+          messages: Immutable.List(),
+          users: Immutable.Map()
+        })())
+      }), () => {
         this.pushTab({
           type: "chatroom",
           name: room.name

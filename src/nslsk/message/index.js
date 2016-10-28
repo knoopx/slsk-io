@@ -185,13 +185,13 @@ Message.prototype.push = function(buffer) {
 Message.prototype.decompress = function(callback) {
   var buf = this._buffers.splice(4).toBuffer();
 
-  zlib.unzip(buf, function(err, buf) {
+  zlib.unzip(buf, (err, buf) => {
     if (err) {
       return callback.call(this, err, buf);
     }
     this._buffers.push(buf);
     callback.call(this, err, this);
-  }.bind(this));
+  });
 
   return this;
 };

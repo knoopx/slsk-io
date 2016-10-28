@@ -33,14 +33,14 @@ function Manager(port) {
   this.tickets = {};
   this.searches = {};
 
-  this.client.on('connect', function(client) {
+  this.client.on('connect', client => {
     var num = 0;
-    self.peer = net.createServer(function(socket) {
+    self.peer = net.createServer(socket => {
       debug('[%s] connection from peer %s:%s', ++num, socket.remoteAddress, socket.remotePort);
       var peer = new Peer(socket);
       peer.infoRequest();
     });
-    self.peer.listen(self.port, function() {
+    self.peer.listen(self.port, () => {
       debug('listening on port %s', self.port);
     });
     self.emit('connect', client);
@@ -72,7 +72,7 @@ Manager.prototype.onLogin = function(message) {
 
 Manager.prototype.onPriviledgedUsers = function(message) {
   var client = this.client;
-  message.users.forEach(function(username, index) {
+  message.users.forEach((username, index) => {
     // client.getStatus(username);
   });
 };
@@ -96,15 +96,15 @@ Manager.prototype.onConnectToPeer = function(message) {
     , token = message.token
     , peer = this.peers[username] = new Peer({ host: ip, port: port });
 
-  peer.on('connect', function(peer) {
+  peer.on('connect', peer => {
     debug('connect with %s', username);
-    peer.on('message', function(message) {
+    peer.on('message', message => {
       debug('peer message from %s: %s', username, inspect(message, false, 4, true));
     });
     peer.pierceFirewall(token);
   });
 
-  peer.on('error', function(err) {
+  peer.on('error', err => {
     debug('connect error with %s [%s]', username, err.code);
   });
 };

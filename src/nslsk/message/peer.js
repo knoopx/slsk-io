@@ -63,7 +63,7 @@ code[SHARES_REQUEST].decode = function(message) {
 var SHARES_REPLY = code.SHARES_REPLY = 5;
 code[SHARES_REPLY] = { name: 'shares reply' };
 code[SHARES_REPLY].decode = function(message, callback) {
-  message.decompress(function(err, message) {
+  message.decompress((err, message) => {
     var dirs = message.int32();
     callback.call(message, err, {
       // TODO:
@@ -91,7 +91,7 @@ code[SEARCH_REQUEST].decode = function(message) {
 var SEARCH_REPLY = code.SEARCH_REPLY = 9;
 code[SEARCH_REPLY] = { name: 'search reply' };
 code[SEARCH_REPLY].decode = function(message, callback) {
-  message.decompress(function(err, message) {
+  message.decompress((err, message) => {
     var user = message.string()
       , ticket = message.int32()
       , count = message.int32()
