@@ -1,0 +1,28 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "plugin:flowtype/recommended",
+    "airbnb"
+  ],
+  "rules": {
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "comma-dangle": ["warn", "never"],
+    "max-len": "off",
+    "no-underscore-dangle": "off",
+    "react/prefer-stateless-function": "off",
+    "react/sort-comp": "off",
+    "semi": ["warn", "never"]
+  },
+  "plugins": [
+    "import",
+    "react",
+    "lodash",
+    "flowtype"
+  ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}
