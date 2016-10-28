@@ -111,15 +111,16 @@ code[GET_PEER_ADDRESS].decode = function(message) {
 const ADD_USER = code.ADD_USER = 5;
 code[ADD_USER] = { name: 'add user' };
 code[ADD_USER].decode = function(message) {
-  const username = message.string(), exists = message.uchar();
-  
+  const username = message.string();
+  const exists = message.uchar();
+
   if (!exists) {
     return {
       username,
       exists,
     };
   }
-  
+
   return {
     username,
     exists,
@@ -331,18 +332,19 @@ code[GET_USER_STATS].decode = function(message) {
 const ROOM_LIST = code.ROOM_LIST = 64;
 code[ROOM_LIST] = { name: 'room list' };
 code[ROOM_LIST].decode = function(message) {
-  let count = message.uint32(), rooms = [];
-  
+  let count = message.uint32();
+  let rooms = [];
+
   for (var i = 0; i < count; ++i) {
     rooms[i] = { name: message.string() };
   }
-  
+
   count = message.uint32();
-  
+
   for (var i = 0; i < count; ++i) {
     rooms[i].users = message.uint32();
   }
-  
+
   return rooms;
 };
 
@@ -353,12 +355,13 @@ code[ROOM_LIST].decode = function(message) {
 const PRIVILEGED_USERS = code.PRIVILEGED_USERS = 69;
 code[PRIVILEGED_USERS] = { name: 'privileged users' };
 code[PRIVILEGED_USERS].decode = function(message) {
-  const count = message.uint32(), users = [];
-  
+  const count = message.uint32();
+  const users = [];
+
   for (let i = 0; i < count; ++i) {
     users[i] = message.string();
   }
-  
+
   return { users };
 };
 
@@ -427,15 +430,17 @@ code[WISHLIST_INTERVAL].decode = function(message) {
 const ROOM_TICKERS = code.ROOM_TICKERS = 113;
 code[ROOM_TICKERS] = { name: 'room tickers' };
 code[ROOM_TICKERS].decode = function(message) {
-  const room = message.string(), count = message.int32(), users = [];
-  
+  const room = message.string();
+  const count = message.int32();
+  const users = [];
+
   for (let i = 0; i < count; ++i) {
     users[i] = {
       user: message.string(),
       tickers: message.string(),
     };
   }
-  
+
   return {
     room,
     users,

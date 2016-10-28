@@ -92,7 +92,10 @@ const SEARCH_REPLY = code.SEARCH_REPLY = 9;
 code[SEARCH_REPLY] = { name: 'search reply' };
 code[SEARCH_REPLY].decode = function(message, callback) {
   message.decompress((err, message) => {
-    const user = message.string(), ticket = message.int32(), count = message.int32(), results = [];
+    const user = message.string();
+    const ticket = message.int32();
+    const count = message.int32();
+    const results = [];
 
     for (let i = 0; i < count; ++i) {
       message.uchar(); // forward cursor. (what?)

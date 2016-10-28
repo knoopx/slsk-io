@@ -159,7 +159,8 @@ Message.prototype.bool = function(val) {
  */
 
 Message.prototype.ip = function() {
-  const ip = this.uint32(), buf = new Buffer(4);
+  const ip = this.uint32();
+  const buf = new Buffer(4);
 
   buf.writeUInt32BE(ip, 0);
   return [buf[0], buf[1], buf[2], buf[3]].join('.');
