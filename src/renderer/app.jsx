@@ -1,3 +1,11 @@
+import React from 'react'
+import Immutable from 'immutable'
+import Path from 'path'
+import UI from './ui'
+import { AppContainer } from 'react-hot-loader'
+
+import support from './support'
+
 let Chat
 
 let Column
@@ -19,12 +27,7 @@ let ref1
 let ref2
 let ref3
 
-import React from 'react'
-import Immutable from 'immutable'
-import Path from 'path'
-import UI from './ui'
 const Button = UI.Buttons.Button
-import { AppContainer } from 'react-hot-loader'
 
 ref = UI.View, ScrollView = ref.ScrollView, TabView = ref.TabView
 
@@ -36,7 +39,6 @@ ref2 = UI.List, List = ref2.List, ListItem = ref2.ListItem
 
 ref3 = require('./app/root'), TopToolbar = ref3.TopToolbar, TransfersPanel = ref3.TransfersPanel, UsersPanel = ref3.UsersPanel, RoomPanel = ref3.RoomPanel, Chat = ref3.Chat
 
-import support from './support'
 
 export default class extends React.Component {
   static displayName = 'App'

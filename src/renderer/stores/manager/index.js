@@ -1,20 +1,19 @@
 
 import net from 'net'
 import util from 'util'
-const inspect = util.inspect
 import debugImport from 'debug'
-const debug = debugImport('nslsk:manager')
-const EventEmitter = require('events').EventEmitter
 import Client from './client'
 import Peer from './peer'
 
-export default Manager
+const inspect = util.inspect
+const debug = debugImport('nslsk:manager')
+const EventEmitter = require('events').EventEmitter
 
 /**
  * Manager constructor.
  */
 
-class Manager {
+export default class Manager {
   constructor(port) {
     const self = this
 

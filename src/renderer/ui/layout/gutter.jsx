@@ -1,29 +1,24 @@
 import React from 'react'
 
-export default React.createClass({
-  displayName: 'Gutter',
-  mixins: [require('react-addons-pure-render-mixin')],
+export default class extends React.Component {
+  static displayName = 'Gutter';
 
-  getDefaultProps() {
-    return {
-      size: 10
-    }
-  },
+  static defaultProps = {
+    size: 10
+  };
 
-  getInitialState() {
-    return {
-      size: this.props.size
-    }
-  },
+  state = {
+    size: this.props.size
+  };
 
-  getStyle() {
+  getStyle = () => {
     return {
       width: `${this.state.size}px`,
       display: 'inline-block'
     }
-  },
+  };
 
   render() {
     return <div className="gutter" style={this.getStyle()} />
   }
-})
+}

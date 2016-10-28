@@ -1,12 +1,11 @@
-
 import net from 'net'
 import Stream from 'stream'
 import Buffers from 'buffers'
-const debug = debugImport('nslsk:node')
 import debugImport from 'debug'
 import Message from './message'
 
-export default Node
+const debug = debugImport('nslsk:node')
+
 
 /**
  * Default Soulseek server.
@@ -24,7 +23,7 @@ const port = 2242
  * Node constructor.
  */
 
-class Node {
+export default class Node {
   constructor(socket, options) {
     Stream.call(this)
 

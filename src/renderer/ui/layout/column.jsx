@@ -1,17 +1,14 @@
 import React from 'react'
 
-export default React.createClass({
-  displayName: 'Column',
-  mixins: [require('react-addons-pure-render-mixin')],
+export default class extends React.Component {
+  static displayName = 'Column';
 
-  getDefaultProps() {
-    return {
-      display: 'flex',
-      flex: 12
-    }
-  },
+  static defaultProps = {
+    display: 'flex',
+    flex: 12
+  };
 
-  getStyle() {
+  getStyle = () => {
     return {
       display: this.props.display,
       flex: this.props.flex,
@@ -25,9 +22,9 @@ export default React.createClass({
       alignSelf: this.props.alignSelf,
       minWidth: 0
     }
-  },
+  };
 
   render() {
     return (<div className="column" {...this.props} style={Object.merge(this.getStyle(), this.props.style)} />)
   }
-})
+}

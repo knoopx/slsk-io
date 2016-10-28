@@ -1,14 +1,11 @@
-
 import Node from './node'
 import message from './message'
-
-export default Peer
 
 /**
  * Peer constructor.
  */
 
-class Peer {
+export default class Peer {
   constructor(socket, options) {
     Node.apply(this, arguments)
     this.type = 'peer'

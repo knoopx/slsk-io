@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default React.createClass({
-  displayName: 'Divider',
-  mixins: [require('react-addons-pure-render-mixin')],
+export default class extends React.Component {
+  static displayName = 'Divider';
 
-  getStyle() {
+  getStyle = () => {
     if ('vertical' in this.props) {
       return {
         borderRight: '1px solid #ccc',
@@ -16,9 +15,9 @@ export default React.createClass({
         flexBasis: '0'
       }
     }
-  },
+  };
 
   render() {
     return <div className="divider" style={this.getStyle()} />
   }
-})
+}

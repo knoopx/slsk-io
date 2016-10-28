@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+
 const Manager = window.require('../src/nslsk/manager')
 
 export default {
