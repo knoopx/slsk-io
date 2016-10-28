@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export default React.createClass({
   displayName: "Gutter",
@@ -7,23 +7,23 @@ export default React.createClass({
   getDefaultProps() {
     return {
       size: 10,
-    };
+    }
   },
 
   getInitialState() {
     return {
       size: this.props.size,
-    };
+    }
   },
 
   getStyle() {
     return {
       width: `${this.state.size}px`,
       display: "inline-block",
-    };
+    }
   },
 
   render() {
-    return <div className="gutter" style={this.getStyle()} />;
+    return <div className="gutter" style={this.getStyle()} />
   },
-});
+})

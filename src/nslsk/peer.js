@@ -1,23 +1,23 @@
 
-import Node from './node';
-import message from './message';
+import Node from './node'
+import message from './message'
 
-export default Peer;
+export default Peer
 
 /**
  * Peer constructor.
  */
 
 function Peer(socket, options) {
-  Node.apply(this, arguments);
-  this.type = 'peer';
+  Node.apply(this, arguments)
+  this.type = 'peer'
 }
 
 /**
  * Inherits from `Node`.
  */
 
-Peer.prototype.__proto__ = Node.prototype;
+Peer.prototype.__proto__ = Node.prototype
 
 /**
  * Pierce firewall
@@ -30,9 +30,9 @@ Peer.prototype.pierceFirewall = function(token) {
   message()
     .uchar(message.PEER.PIERCE_FIREWALL)
     .uint32(token)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Peer init.
@@ -49,9 +49,9 @@ Peer.prototype.peerInit = function(localUsername, type, token) {
     .string(localUsername)
     .string(type)
     .uint32(token)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Shares request.
@@ -60,9 +60,9 @@ Peer.prototype.peerInit = function(localUsername, type, token) {
  */
 
 Peer.prototype.sharesRequest = function() {
-  message(message.PEER.SHARES_REQUEST).end(this.write.bind(this));
-  return this;
-};
+  message(message.PEER.SHARES_REQUEST).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Info request.
@@ -73,6 +73,6 @@ Peer.prototype.sharesRequest = function() {
 Peer.prototype.infoRequest = function() {
   message()
     .uchar(message.PEER.INFO_REQUEST)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}

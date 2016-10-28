@@ -1,22 +1,22 @@
 
-import crypto from 'crypto';
-import message from './message';
-import utils from './utils';
-import Node from './node';
+import crypto from 'crypto'
+import message from './message'
+import utils from './utils'
+import Node from './node'
 
 /**
  * Soulseek client version.
  */
 
-const version = 182;
+const version = 182
 
 /**
  * Soulseek client minior version.
  */
 
-const minor = 1;
+const minor = 1
 
-export default Client;
+export default Client
 
 /**
  * Client constructor.
@@ -26,15 +26,15 @@ export default Client;
  */
 
 function Client(socket, options) {
-  Node.apply(this, arguments);
-  this.type = 'server';
+  Node.apply(this, arguments)
+  this.type = 'server'
 }
 
 /**
  * Inherits from `Node`.
  */
 
-Client.prototype.__proto__ = Node.prototype;
+Client.prototype.__proto__ = Node.prototype
 
 /**
  * Login.
@@ -51,9 +51,9 @@ Client.prototype.login = function(username, password) {
     .uint32(version)
     .string(utils.md5(username.concat(password)))
     .uint32(minor)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * File search.
@@ -64,14 +64,14 @@ Client.prototype.login = function(username, password) {
 
 Client.prototype.fileSearch = function(query, ticket) {
   if (ticket == null)
-    ticket = crypto.randomBytes(4).readUInt32LE();
+    ticket = crypto.randomBytes(4).readUInt32LE()
 
   message(26)
     .int32(ticket)
     .string(query)
-    .end(this.write.bind(this));
-  return ticket;
-};
+    .end(this.write.bind(this))
+  return ticket
+}
 
 /**
  * Search request.
@@ -80,9 +80,9 @@ Client.prototype.fileSearch = function(query, ticket) {
  */
 
 Client.prototype.searchRequest = function() {
-  message(message.SERVER.SEARCH_REQUEST).end(this.write.bind(this));
-  return this;
-};
+  message(message.SERVER.SEARCH_REQUEST).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Connect to peer.
@@ -98,9 +98,9 @@ Client.prototype.connectToPeer = function(token, username, type) {
     .uint32(token)
     .string(username)
     .string(type)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Get status.
@@ -112,9 +112,9 @@ Client.prototype.connectToPeer = function(token, username, type) {
 Client.prototype.getStatus = function(username) {
   message(message.SERVER.GET_STATUS)
     .string(username)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Privileged users.
@@ -123,9 +123,9 @@ Client.prototype.getStatus = function(username) {
  */
 
 Client.prototype.privilegedUsers = function() {
-  message(message.SERVER.PRIVILEGED_USERS).end(this.write.bind(this));
-  return this;
-};
+  message(message.SERVER.PRIVILEGED_USERS).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Set listen port.
@@ -137,9 +137,9 @@ Client.prototype.privilegedUsers = function() {
 Client.prototype.setListenPort = function(port) {
   message(message.SERVER.SET_LISTEN_PORT)
     .uint32(port)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Get peer address.
@@ -151,9 +151,9 @@ Client.prototype.setListenPort = function(port) {
 Client.prototype.getPeerAddress = function(username) {
   message(message.SERVER.GET_PEER_ADDRESS)
     .string(username)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Add user.
@@ -165,9 +165,9 @@ Client.prototype.getPeerAddress = function(username) {
 Client.prototype.addUser = function(username) {
   message(message.SERVER.ADD_USER)
     .string(username)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Say in chat room.
@@ -181,9 +181,9 @@ Client.prototype.sayInChatRoom = function(room, message) {
   message(message.SERVER.SAY_IN_CHAT_ROOM)
     .string(room)
     .string(message)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Join a room.
@@ -195,9 +195,9 @@ Client.prototype.sayInChatRoom = function(room, message) {
 Client.prototype.joinRoom = function(room) {
   message(message.SERVER.JOIN_ROOM)
     .string(room)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Leave room.
@@ -209,9 +209,9 @@ Client.prototype.joinRoom = function(room) {
 Client.prototype.leaveRoom = function(room) {
   message(message.SERVER.LEAVE_ROOM)
     .string(room)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Room list.
@@ -220,9 +220,9 @@ Client.prototype.leaveRoom = function(room) {
  */
 
 Client.prototype.roomList = function() {
-  message(message.SERVER.ROOM_LIST).end(this.write.bind(this));
-  return this;
-};
+  message(message.SERVER.ROOM_LIST).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Set room ticker.
@@ -236,9 +236,9 @@ Client.prototype.setRoomTicker = function(room, ticker) {
   message(message.SERVER.SET_ROOM_TICKER)
     .string(room)
     .string(ticker)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Get user stats.
@@ -250,9 +250,9 @@ Client.prototype.setRoomTicker = function(room, ticker) {
 Client.prototype.getUserStats = function(username) {
   message(message.SERVER.GET_USER_STATS)
     .string(username)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Acknowledge private messsage.
@@ -264,9 +264,9 @@ Client.prototype.getUserStats = function(username) {
 Client.prototype.acknowledgePrivateMessage = function(messageID) {
   message(message.SERVER.ACKNOWLEDGE_PRIVATE_MESSAGE)
     .int32(messageID)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Set online status.
@@ -278,9 +278,9 @@ Client.prototype.acknowledgePrivateMessage = function(messageID) {
 Client.prototype.setOnlineStatus = function(status) {
   message(message.SERVER.SET_ONLINE_STATUS)
     .int32(status)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Ping.
@@ -289,9 +289,9 @@ Client.prototype.setOnlineStatus = function(status) {
  */
 
 Client.prototype.ping = function() {
-  message(message.SERVER.PING).end(this.write.bind(this));
-  return this;
-};
+  message(message.SERVER.PING).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Send speed.
@@ -305,9 +305,9 @@ Client.prototype.sendSpeed = function(username, speed) {
   message(message.SERVER.SEND_SPEED)
     .string(username)
     .int32(speed)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Shared folders & files.
@@ -321,9 +321,9 @@ Client.prototype.sharedFoldersAndFiles = function(dirs, files) {
   message(message.SERVER.SHARED_FOLDERS_AND_FILES)
     .int32(dirs)
     .int32(files)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}
 
 /**
  * Check privileges.
@@ -332,9 +332,9 @@ Client.prototype.sharedFoldersAndFiles = function(dirs, files) {
  */
 
 Client.prototype.checkPrivileges = function() {
-  message(message.SERVER.CHECK_PRIVILEGES).end(this.write.bind(this));
-  return this;
-};
+  message(message.SERVER.CHECK_PRIVILEGES).end(this.write.bind(this))
+  return this
+}
 
 /**
  * Have no parents
@@ -346,6 +346,6 @@ Client.prototype.checkPrivileges = function() {
 Client.prototype.haveNoParents = function(haveParents) {
   message(message.SERVER.HAVE_NO_PARENTS)
     .bool(haveParents)
-    .end(this.write.bind(this));
-  return this;
-};
+    .end(this.write.bind(this))
+  return this
+}

@@ -3,4 +3,4 @@ export default {
   Row: require("./layout/row"),
   Column: require("./layout/column"),
   Divider: require("./layout/divider")
-};
+}

@@ -1,5 +1,5 @@
-import Immutable from "immutable";
-const Manager = window.require("../src/nslsk/manager");
+import Immutable from "immutable"
+const Manager = window.require("../src/nslsk/manager")
 
 export default {
   manager: new Manager(),
@@ -12,4 +12,4 @@ export default {
   isConnected: false,
   isLoggedIn: false,
   tabs: []
-};
+}

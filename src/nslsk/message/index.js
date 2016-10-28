@@ -3,31 +3,31 @@
  * Module dependencies.
  */
 
-const debug = require('debug')('nslsk:message');
+const debug = require('debug')('nslsk:message')
 
-const zlib = require('zlib');
-const int53 = require('int53');
-const Buffers = require('buffers');
+const zlib = require('zlib')
+const int53 = require('int53')
+const Buffers = require('buffers')
 
-export default Message;
+export default Message
 
 /**
  * Server message.
  */
 
-Message.SERVER = require('./server');
+Message.SERVER = require('./server')
 
 /**
  * Peer message.
  */
 
-Message.PEER = require('./peer');
+Message.PEER = require('./peer')
 
 /**
  * Distributed message.
  */
 
-Message.DISTRIBUTED = require('./distributed');
+Message.DISTRIBUTED = require('./distributed')
 
 /**
  * Message constructor.
@@ -37,16 +37,16 @@ Message.DISTRIBUTED = require('./distributed');
 
 function Message(buffers) {
   if (!(this instanceof Message)) {
-    return new Message(buffers);
+    return new Message(buffers)
   }
 
-  this.name = 'unknown';
-  this._cursor = 0;
+  this.name = 'unknown'
+  this._cursor = 0
 
   if (buffers instanceof Buffers) {
-    this._buffers = buffers;
+    this._buffers = buffers
   } else {
-    this._buffers = new Buffers();
+    this._buffers = new Buffers()
   }
 
   if ('[object Number]' === Object.prototype.toString.call(buffers)) {
@@ -61,17 +61,17 @@ function Message(buffers) {
 
 Message.prototype.uint32 = function(val) {
   if (val) {
-    const buf = new Buffer(4);
+    const buf = new Buffer(4)
 
-    buf.writeUInt32LE(val, 0);
-    this._buffers.push(buf);
+    buf.writeUInt32LE(val, 0)
+    this._buffers.push(buf)
 
-    return this;
+    return this
   }
-  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readUInt32LE(0);
-  this._cursor += 4;
-  return ret;
-};
+  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readUInt32LE(0)
+  this._cursor += 4
+  return ret
+}
 
 /**
  * @param {Number} val [optional]
@@ -80,13 +80,13 @@ Message.prototype.uint32 = function(val) {
 
 Message.prototype.uchar = function(val) {
   if (val || 0 === val) {
-    this._buffers.push(new Buffer([val]));
-    return this;
+    this._buffers.push(new Buffer([val]))
+    return this
   }
-  const ret = this._buffers.get(this._cursor);
-  ++this._cursor;
-  return ret;
-};
+  const ret = this._buffers.get(this._cursor)
+  ++this._cursor
+  return ret
+}
 
 /**
  * @param {String} val [optional]
@@ -95,18 +95,18 @@ Message.prototype.uchar = function(val) {
 
 Message.prototype.string = function(val) {
   if (val) {
-    const buf = new Buffer(val, 'utf8');
+    const buf = new Buffer(val, 'utf8')
 
-    this.uint32(buf.length);
-    this._buffers.push(buf);
+    this.uint32(buf.length)
+    this._buffers.push(buf)
 
-    return this;
+    return this
   }
-  const len = this.uint32();
-  const ret = this._buffers.slice(this._cursor, this._cursor + len).toString('utf8');
-  this._cursor += len;
-  return ret;
-};
+  const len = this.uint32()
+  const ret = this._buffers.slice(this._cursor, this._cursor + len).toString('utf8')
+  this._cursor += len
+  return ret
+}
 
 /**
  * @param {Number} val [optional]
@@ -115,17 +115,17 @@ Message.prototype.string = function(val) {
 
 Message.prototype.int32 = function(val) {
   if (val) {
-    const buf = new Buffer(4);
+    const buf = new Buffer(4)
 
-    buf.writeInt32LE(val, 0);
-    this._buffers.push(buf);
+    buf.writeInt32LE(val, 0)
+    this._buffers.push(buf)
 
-    return this;
+    return this
   }
-  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readInt32LE(0);
-  this._cursor += 4;
-  return ret;
-};
+  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readInt32LE(0)
+  this._cursor += 4
+  return ret
+}
 
 /**
  * @param {Number} val [optional]
@@ -136,11 +136,11 @@ Message.prototype.int64 = function(val) {
   if (val) {
     // TODO:
   }
-  const buf = this._buffers.slice(this._cursor, this._cursor + 8);
-  this._cursor += 8;
+  const buf = this._buffers.slice(this._cursor, this._cursor + 8)
+  this._cursor += 8
   return int53.readUInt64LE(buf)
-  // return (buf.readUInt32LE() << 8) + buf.readUInt32LE();
-};
+  // return (buf.readUInt32LE() << 8) + buf.readUInt32LE()
+}
 
 /**
  * @param {Boolean} val
@@ -149,22 +149,22 @@ Message.prototype.int64 = function(val) {
 
 Message.prototype.bool = function(val) {
   if (val || false === val) {
-    return this.uchar(val ? 1 : 0);
+    return this.uchar(val ? 1 : 0)
   }
-  return !!this.uchar();
-};
+  return !!this.uchar()
+}
 
 /**
  * @return {String}
  */
 
 Message.prototype.ip = function() {
-  const ip = this.uint32();
-  const buf = new Buffer(4);
+  const ip = this.uint32()
+  const buf = new Buffer(4)
 
-  buf.writeUInt32BE(ip, 0);
-  return [buf[0], buf[1], buf[2], buf[3]].join('.');
-};
+  buf.writeUInt32BE(ip, 0)
+  return [buf[0], buf[1], buf[2], buf[3]].join('.')
+}
 
 /**
  * @param {Buffer} buffer
@@ -172,9 +172,9 @@ Message.prototype.ip = function() {
  */
 
 Message.prototype.push = function(buffer) {
-  this._buffers.push(buffer);
-  return this;
-};
+  this._buffers.push(buffer)
+  return this
+}
 
 /**
  * Decompress gzipped message.
@@ -184,18 +184,18 @@ Message.prototype.push = function(buffer) {
  */
 
 Message.prototype.decompress = function(callback) {
-  const buf = this._buffers.splice(4).toBuffer();
+  const buf = this._buffers.splice(4).toBuffer()
 
   zlib.unzip(buf, (err, buf) => {
     if (err) {
-      return callback.call(this, err, buf);
+      return callback.call(this, err, buf)
     }
-    this._buffers.push(buf);
-    callback.call(this, err, this);
-  });
+    this._buffers.push(buf)
+    callback.call(this, err, this)
+  })
 
-  return this;
-};
+  return this
+}
 
 /**
  * Decode buffered message.
@@ -206,56 +206,56 @@ Message.prototype.decompress = function(callback) {
  */
 
 Message.prototype.decode = function(type, callback) {
-  this._cursor = 0;
-  const code = this.uint32();
+  this._cursor = 0
+  const code = this.uint32()
 
-  debug('%s:%s', type, code/*, this._buffers */);
+  debug('%s:%s', type, code/*, this._buffers */)
 
   switch (type) {
     case 'server':
-      var message = Message.SERVER[code];
-      break;
+      var message = Message.SERVER[code]
+      break
     case 'peer':
-      var message = Message.PEER[code];
-      break;
+      var message = Message.PEER[code]
+      break
     case 'distributed':
-      var message = Message.DISTRIBUTED[code];
-      break;
+      var message = Message.DISTRIBUTED[code]
+      break
     default:
-      throw new TypeError(`Unknown message type [${type}]`);
+      throw new TypeError(`Unknown message type [${type}]`)
   }
 
   if (!message) {
-    throw new Error(`Unknown ${type} message code [${code}]`);
+    throw new Error(`Unknown ${type} message code [${code}]`)
   }
 
-  this.name = message.name;
+  this.name = message.name
 
   switch (message.decode.length) {
     case 2:
-      message.decode.call(this, this, callback);
-      break;
+      message.decode.call(this, this, callback)
+      break
     case 1:
-      const decoded = message.decode.call(this, this);
-      callback(null, decoded);
-      break;
+      const decoded = message.decode.call(this, this)
+      callback(null, decoded)
+      break
     default:
-      throw new Error('invalid parameters');
+      throw new Error('invalid parameters')
   }
 
-  return this;
-};
+  return this
+}
 
 /**
  * @param {Function} callback
  */
 
 Message.prototype.end = function(callback) {
-  const buf = new Buffer(4);
+  const buf = new Buffer(4)
 
-  buf.writeUInt32LE(this._buffers.length, 0);
-  this._buffers.unshift(buf);
-  this._cursor += 4;
+  buf.writeUInt32LE(this._buffers.length, 0)
+  this._buffers.unshift(buf)
+  this._cursor += 4
 
-  return callback.call(this, this._buffers);
-};
+  return callback.call(this, this._buffers)
+}

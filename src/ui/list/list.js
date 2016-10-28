@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 export default class extends React.Component {
-  static displayName = "List";
+  static displayName = "List"
 
   render() {
-    return <div className="list" {...this.props} />;
+    return <div className="list" {...this.props} />
   }
-};
+}

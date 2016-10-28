@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export default React.createClass({
   displayName: "Row",
@@ -8,7 +8,7 @@ export default React.createClass({
     return {
       display: "flex",
       flex: 12,
-    };
+    }
   },
 
   getStyle() {
@@ -23,13 +23,13 @@ export default React.createClass({
       padding: this.props.padding,
       alignItems: this.props.alignItems,
       alignSelf: this.props.alignSelf,
-    };
+    }
   },
 
   render() {
     return <div
       className="row"
       {...this.props}
-      style={Object.merge(this.getStyle(), this.props.style)} />;
+      style={Object.merge(this.getStyle(), this.props.style)} />
   },
-});
+})

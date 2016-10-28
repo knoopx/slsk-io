@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const style = {
   container: {
@@ -14,12 +14,12 @@ const style = {
     right: 0,
     bottom: 0,
   },
-};
+}
 
 export default class extends React.Component {
-  static displayName = "ScrollView";
+  static displayName = "ScrollView"
 
   render() {
-    return <div style={style.container}><div style={style.inner}>{this.props.children}</div></div>;
+    return <div style={style.container}><div style={style.inner}>{this.props.children}</div></div>
   }
-};
+}

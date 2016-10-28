@@ -4,4 +4,4 @@ export default {
   TopToolbar: require("./root/top-toolbar"),
   TransfersPanel: require("./root/transfers-panel"),
   UsersPanel: require("./root/users-panel")
-};
+}

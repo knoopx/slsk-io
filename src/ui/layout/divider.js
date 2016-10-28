@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export default React.createClass({
   displayName: "Divider",
@@ -9,16 +9,16 @@ export default React.createClass({
       return {
         borderRight: "1px solid #ccc",
         flexBasis: "0",
-      };
+      }
     } else {
       return {
         borderBottom: "1px solid #ccc",
         flexBasis: "0",
-      };
+      }
     }
   },
 
   render() {
-    return <div className="divider" style={this.getStyle()} />;
+    return <div className="divider" style={this.getStyle()} />
   },
-});
+})

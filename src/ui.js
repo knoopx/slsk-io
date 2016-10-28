@@ -4,4 +4,4 @@ export default {
   List: require("./ui/list"),
   View: require("./ui/view"),
   Toolbar: require("./ui/toolbar")
-};
+}

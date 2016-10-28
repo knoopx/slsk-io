@@ -10,4 +10,4 @@
 
  */
 
-const code = module.exports = {};
+const code = module.exports = {}
