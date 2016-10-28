@@ -5,7 +5,6 @@
 
 const crypto = require('crypto');
 
-const Buffers = require('buffers');
 const message = require('./message');
 const utils = require('./utils');
 const Node = require('./node');

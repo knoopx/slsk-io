@@ -5,15 +5,12 @@
 
 const net = require('net');
 
-const crypto = require('crypto');
 const util = require('util');
 const inspect = util.inspect;
 const debug = require('debug')('nslsk:manager');
 const EventEmitter = require('events').EventEmitter;
-const Message = require('./message');
 const Client = require('./client');
 const Peer = require('./peer');
-const utils = require('./utils');
 
 export default Manager;
 
