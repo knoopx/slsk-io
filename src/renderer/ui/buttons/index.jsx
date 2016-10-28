@@ -1,3 +1,1 @@
-export default {
-  Button: require('./buttons/button')
-}
+export Button from './button'

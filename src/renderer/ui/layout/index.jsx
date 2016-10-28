@@ -1,6 +1,4 @@
-export default {
-  Gutter: require('./layout/gutter'),
-  Row: require('./layout/row'),
-  Column: require('./layout/column'),
-  Divider: require('./layout/divider')
-}
+export Gutter from './gutter'
+export Row from './row'
+export Column from './column'
+export Divider from './divider'

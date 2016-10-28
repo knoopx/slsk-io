@@ -1,7 +1,5 @@
-export default {
-  Buttons: require('./ui/buttons'),
-  Layout: require('./ui/layout'),
-  List: require('./ui/list'),
-  View: require('./ui/view'),
-  Toolbar: require('./ui/toolbar')
-}
+export * as Buttons from './buttons'
+export * as Layout from './layout'
+export * as Lists from './lists'
+export * as View from './view'
+export Toolbar from './toolbar'

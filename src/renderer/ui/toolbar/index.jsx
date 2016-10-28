@@ -1,9 +1,7 @@
 import React from 'react'
-const Row = require('./layout').Row
+import { Row } from '../layout'
 
-export default class extends React.Component {
-  static displayName = 'Toolbar'
-
+export default class Toolbar extends React.Component {
   render() {
     return <Row className="toolbar" {...this.props} />
   }

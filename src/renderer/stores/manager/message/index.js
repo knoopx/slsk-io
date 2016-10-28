@@ -5,9 +5,9 @@
 
 const debug = require('debug')('nslsk:message')
 
-const zlib = require('zlib')
-const int53 = require('int53')
-const Buffers = require('buffers')
+import zlib from 'zlib';
+import int53 from 'int53';
+import Buffers from 'buffers';
 
 export default Message
 

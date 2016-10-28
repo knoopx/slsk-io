@@ -1,4 +1,2 @@
-export default {
-  TabView: require('./view/tab-view'),
-  ScrollView: require('./view/scroll-view')
-}
+export TabView from './tab-view'
+export ScrollView from './scroll-view'

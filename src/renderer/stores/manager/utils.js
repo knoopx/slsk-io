@@ -7,7 +7,7 @@ import crypto from 'crypto'
  * @return {String}
  */
 
-exports.md5 = function (str) {
+export function md5(str) {
   return crypto
     .createHash('md5')
     .update(str, 'utf8')

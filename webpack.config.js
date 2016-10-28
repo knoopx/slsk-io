@@ -1,6 +1,33 @@
-import path from 'path';
+const path = require('path')
+const webpack = require('webpack')
 
-export default {
+module.exports = {
+  debug: true,
+  target: 'electron-renderer',
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+    'babel-polyfill',
+    'source-map-support',
+    // 'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
+    './src/renderer/app'
+  ],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.json'],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+  },
+  externals: [],
   module: {
     loaders: [
       {
@@ -36,18 +63,5 @@ export default {
         loader: 'file-loader'
       }
     ]
-  },
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    libraryTarget: 'commonjs2'
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
-  },
-  plugins: [
-
-  ],
-  externals: []
-};
+  }
+}

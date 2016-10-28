@@ -7,7 +7,7 @@ import Peer from './peer'
 
 const inspect = util.inspect
 const debug = debugImport('nslsk:manager')
-const EventEmitter = require('events').EventEmitter
+import {EventEmitter} from 'events';
 
 /**
  * Manager constructor.
