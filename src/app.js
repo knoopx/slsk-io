@@ -19,7 +19,7 @@ ref3 = require("./app/root"), TopToolbar = ref3.TopToolbar, TransfersPanel = ref
 
 var support = require("./support");
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "App",
   pushTab: function(tab, fn) {
     return this.setState(function(state) {

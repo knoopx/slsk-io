@@ -10,7 +10,7 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 
 var ScrollView = UI.View.ScrollView;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "Chat",
   render: function() {
     return React.createElement(List, null, this.props.messages.map(this.renderMessage));

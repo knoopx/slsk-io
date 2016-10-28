@@ -13,7 +13,7 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 
 var ScrollView = UI.View.ScrollView;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "RoomPanel",
   propTypes: {
     rooms: ImmutablePropTypes.list,

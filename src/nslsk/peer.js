@@ -6,11 +6,7 @@
 var Node = require('./node')
   , message = require('./message');
 
-/**
- * Expose `Peer`.
- */
-
-module.exports = Peer;
+export default Peer;
 
 /**
  * Peer constructor.

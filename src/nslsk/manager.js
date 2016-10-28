@@ -14,11 +14,7 @@ var net = require('net')
   , Peer = require('./peer')
   , utils = require('./utils');
 
-/**
- * Expose `Manager`.
- */
-
-module.exports = Manager;
+export default Manager;
 
 /**
  * Manager constructor.

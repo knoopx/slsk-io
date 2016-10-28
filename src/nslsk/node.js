@@ -9,11 +9,7 @@ var net = require('net')
   , debug = require('debug')('nslsk:node')
   , Message = require('./message');
 
-/**
- * Expose `Node`.
- */
-
-module.exports = Node;
+export default Node;
 
 /**
  * Default Soulseek server.

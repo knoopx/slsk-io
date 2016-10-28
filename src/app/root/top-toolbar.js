@@ -8,7 +8,7 @@ var Button = UI.Buttons.Button;
 
 ref = UI.Layout, Row = ref.Row, Column = ref.Column, Divider = ref.Divider, Gutter = ref.Gutter;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "TopToolbar",
   propTypes: {
     isConnected: React.PropTypes.bool

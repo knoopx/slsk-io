@@ -7,7 +7,7 @@ var Toolbar = UI.Toolbar;
 
 ref = UI.Layout, Row = ref.Row, Column = ref.Column, Divider = ref.Divider, Gutter = ref.Gutter;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "TransfersPanel",
   render: function() {
     return React.createElement(Row, {

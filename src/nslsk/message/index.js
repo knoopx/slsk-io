@@ -8,11 +8,7 @@ var debug = require('debug')('nslsk:message')
   , int53 = require('int53')
   , Buffers = require('buffers');
 
-/**
- * Expose `Message`.
- */
-
-module.exports = Message;
+export default Message;
 
 /**
  * Server message.

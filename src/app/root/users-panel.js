@@ -12,7 +12,7 @@ ref1 = UI.List, List = ref1.List, ListItem = ref1.ListItem;
 var ScrollView = UI.View.ScrollView;
 var Button = UI.Buttons.Button;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "UsersPanel",
   render: function() {
     return React.createElement(Column, null, React.createElement(Toolbar, null, React.createElement(Row, {

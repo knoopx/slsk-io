@@ -1,7 +1,7 @@
 var React = require("react");
 var Immutable = require("immutable");
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "Test",
   getInitialState: function() {
     return this.props.state;

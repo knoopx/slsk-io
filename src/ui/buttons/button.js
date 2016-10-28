@@ -1,6 +1,6 @@
 var React = require("react");
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "Button",
   mixins: [require('react-addons-pure-render-mixin')],
   render: function() {

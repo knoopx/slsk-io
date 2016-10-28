@@ -21,11 +21,7 @@ var version = 182;
 
 var minor = 1;
 
-/**
- * Expose `Client`.
- */
-
-module.exports = Client;
+export default Client;
 
 /**
  * Client constructor.

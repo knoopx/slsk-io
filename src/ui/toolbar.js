@@ -1,7 +1,7 @@
 var React = require("react");
 var Row = require("./layout").Row;
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "Toolbar",
   render: function() {
     return React.createElement(Row, Object.assign({

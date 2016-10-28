@@ -1,7 +1,7 @@
 var Immutable = require("immutable");
 var Manager = window.require("../src/nslsk/manager");
 
-module.exports = {
+export default {
   manager: new Manager(),
   peers: Immutable.Map(),
   tickets: Immutable.Map(),

@@ -1,7 +1,7 @@
 var React = require("react");
 var classNames = require("classnames");
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: "TabSet",
   componentDidMount: function() {
     return typeof module.onReload === "function" ? module.onReload(() => {
