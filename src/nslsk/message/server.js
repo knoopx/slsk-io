@@ -72,13 +72,13 @@ code[LOGIN].decode = function(message) {
   if (!success) {
     return {
       success,
-      reason: message.string()
+      reason: message.string(),
     };
   }
   
   return {
     success,
-    greet: message.string()
+    greet: message.string(),
   };
 };
 
@@ -100,7 +100,7 @@ code[GET_PEER_ADDRESS].decode = function(message) {
   return {
     username: message.string(),
     ip: message.ip(),
-    port: message.int32()
+    port: message.int32(),
   };
 };
 
@@ -116,7 +116,7 @@ code[ADD_USER].decode = function(message) {
   if (!exists) {
     return {
       username,
-      exists
+      exists,
     };
   }
   
@@ -128,7 +128,7 @@ code[ADD_USER].decode = function(message) {
     downloadnum: message.int64(),
     files: message.int32(),
     dirs: message.int32(),
-    countryCode: message.string()
+    countryCode: message.string(),
   };
 };
 
@@ -142,7 +142,7 @@ code[GET_STATUS].decode = function(message) {
   return {
     username: message.string(),
     status: message.int32(),
-    privileged: message.uchar()
+    privileged: message.uchar(),
   };
 };
 
@@ -156,7 +156,7 @@ code[SAY_IN_CHAT_ROOM].decode = function(message) {
   return {
     room: message.string(),
     username: message.string(),
-    message: message.string()
+    message: message.string(),
   };
 };
 
@@ -181,7 +181,7 @@ const LEAVE_ROOM = code.LEAVE_ROOM = 15;
 code[LEAVE_ROOM] = { name: 'leave room' };
 code[LEAVE_ROOM].decode = function(message) {
   return {
-    room: message.string()
+    room: message.string(),
   };
 };
 
@@ -201,7 +201,7 @@ code[USER_JOINED_ROOM].decode = function(message) {
     files: message.int32(),
     dirs: message.int32(),
     slotsfree: message.int32(),
-    countryCode: message.string()
+    countryCode: message.string(),
   };
 };
 
@@ -214,7 +214,7 @@ code[USER_LEFT_ROOM] = { name: 'user left room' };
 code[USER_LEFT_ROOM].decode = function(message) {
   return {
     room: message.string(),
-    username: message.string()
+    username: message.string(),
   };
 };
 
@@ -231,7 +231,7 @@ code[CONNECT_TO_PEER].decode = function(message) {
     ip: message.ip(),
     port: message.uint32(),
     token: message.uint32(),
-    privileged: message.uchar()
+    privileged: message.uchar(),
   };
 };
 
@@ -247,7 +247,7 @@ code[PRIVATE_MESSAGES].decode = function(message) {
     timestamp: message.int32(),
     username: message.string(),
     message: message.string(),
-    isAdmin: message.uchar()
+    isAdmin: message.uchar(),
   };
 };
 
@@ -269,7 +269,7 @@ code[FILE_SEARCH].decode = function(message) {
   return {
     username: message.string(),
     ticket: message.int32(),
-    searchQuery: message.string()
+    searchQuery: message.string(),
   };
 };
 
@@ -320,7 +320,7 @@ code[GET_USER_STATS].decode = function(message) {
     avgspeed: message.int32(),
     downloadnum: message.int64(),
     files: message.int32(),
-    dirs: message.int32()
+    dirs: message.int32(),
   };
 };
 
@@ -398,7 +398,7 @@ const CHECK_PRIVILEGES = code.CHECK_PRIVILEGES = 92;
 code[CHECK_PRIVILEGES] = { name: 'check privileges' };
 code[CHECK_PRIVILEGES].decode = function(message) {
   return {
-    timeLeft: message.int32()
+    timeLeft: message.int32(),
   };
 };
 
@@ -432,13 +432,13 @@ code[ROOM_TICKERS].decode = function(message) {
   for (let i = 0; i < count; ++i) {
     users[i] = {
       user: message.string(),
-      tickers: message.string()
+      tickers: message.string(),
     };
   }
   
   return {
     room,
-    users
+    users,
   };
 };
 
@@ -452,7 +452,7 @@ code[ROOM_TICKER_ADD].decode = function(message) {
   return {
     room: message.string(),
     user: message.string(),
-    ticker: message.string()
+    ticker: message.string(),
   };
 };
 
@@ -465,7 +465,7 @@ code[ROOM_TICKER_REMOVE] = { name: 'room ticker remove' };
 code[ROOM_TICKER_REMOVE].decode = function(message) {
   return {
     room: message.string(),
-    user: message.string()
+    user: message.string(),
   };
 };
 
@@ -486,6 +486,6 @@ code[CANNOT_CONNECT] = { name: 'cannot connect' };
 code[CANNOT_CONNECT].decode = function(message) {
   return {
     token: message.uint32() /*,
-    username: message.string() */
+username: message.string() */,
   };
 };

@@ -80,7 +80,7 @@ code[SEARCH_REQUEST] = { name: 'search request' };
 code[SEARCH_REQUEST].decode = function(message) {
   return {
     ticket: message.int32(),
-    query: message.string()
+    query: message.string(),
   };
 };
 
@@ -101,26 +101,30 @@ code[SEARCH_REPLY].decode = function(message, callback) {
         filename: message.string(),
         size: message.int64(),
         ext: message.string(),
-        attributes: []
+        attributes: [],
       };
 
       const attrCount = message.int32();
       for (let j = 0; j < attrCount; ++j) {
         results[i].attributes[j] = {
           place: message.int32(),
-          attribute: message.int32()
+          attribute: message.int32(),
         }
       }
     }
 
-    callback.call(message, err, {
-      user,
-      ticket,
-      results,
-      slotfree: message.uchar(),
-      avgspeed: message.int32(),
-      queueLength: message.int64()
-    });
+    callback.call(
+      message,
+      err,
+      {
+        user,
+        ticket,
+        results,
+        slotfree: message.uchar(),
+        avgspeed: message.int32(),
+        queueLength: message.int64(),
+      },
+    );
   });
 };
 

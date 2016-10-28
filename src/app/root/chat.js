@@ -12,19 +12,34 @@ const ScrollView = UI.View.ScrollView;
 
 export default React.createClass({
   displayName: "Chat",
+
   render() {
     return React.createElement(List, null, this.props.messages.map(this.renderMessage));
   },
+
   renderMessage(message, index) {
-    return React.createElement(ListItem, {
-      "key": index
-    }, React.createElement(Row, null, React.createElement(Column, {
-      "flex": "2",
-      "style": {
-        textAlign: "right"
-      }
-    }, React.createElement("strong", null, message.username)), React.createElement(Gutter, null), React.createElement(Column, {
-      "flex": "10"
-    }, message.message)));
-  }
+    return React.createElement(
+      ListItem,
+      {
+        "key": index,
+      },
+      React.createElement(Row, null, React.createElement(
+        Column,
+        {
+          "flex": "2",
+
+          "style": {
+            textAlign: "right",
+          },
+        },
+        React.createElement("strong", null, message.username),
+      ), React.createElement(Gutter, null), React.createElement(
+        Column,
+        {
+          "flex": "10",
+        },
+        message.message,
+      )),
+    );
+  },
 });

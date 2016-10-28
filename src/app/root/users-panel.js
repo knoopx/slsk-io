@@ -14,13 +14,26 @@ const Button = UI.Buttons.Button;
 
 export default React.createClass({
   displayName: "UsersPanel",
+
   render() {
-    return React.createElement(Column, null, React.createElement(Toolbar, null, React.createElement(Row, {
-      "alignItems": "center"
-    }, React.createElement(Column, null, React.createElement("span", null, "Users (", this.props.users.count(), ")")), React.createElement(Button, null, React.createElement("i", {
-      "className": "fa fa-plus"
-    })))), React.createElement(ScrollView, null, React.createElement(List, null, this.props.users.sort().map(user => React.createElement(ListItem, {
-      "key": user
-    }, user)))));
-  }
+    return React.createElement(Column, null, React.createElement(Toolbar, null, React.createElement(
+      Row,
+      {
+        "alignItems": "center",
+      },
+      React.createElement(Column, null, React.createElement("span", null, "Users (", this.props.users.count(), ")")),
+      React.createElement(Button, null, React.createElement(
+        "i",
+        {
+          "className": "fa fa-plus",
+        },
+      )),
+    )), React.createElement(ScrollView, null, React.createElement(List, null, this.props.users.sort().map(user => React.createElement(
+      ListItem,
+      {
+        "key": user,
+      },
+      user,
+    )))));
+  },
 });

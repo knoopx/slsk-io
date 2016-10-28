@@ -3,12 +3,14 @@ import React from "react";
 export default React.createClass({
   displayName: "Row",
   mixins: [require('react-addons-pure-render-mixin')],
+
   getDefaultProps() {
     return {
       display: "flex",
-      flex: 12
+      flex: 12,
     };
   },
+
   getStyle() {
     return {
       display: this.props.display,
@@ -20,14 +22,15 @@ export default React.createClass({
       whiteSpace: "nowrap",
       padding: this.props.padding,
       alignItems: this.props.alignItems,
-      alignSelf: this.props.alignSelf
+      alignSelf: this.props.alignSelf,
     };
   },
+
   render() {
     return React.createElement("div", Object.assign({
-      "className": "row"
+      "className": "row",
     }, this.props, {
-      "style": Object.merge(this.getStyle(), this.props.style)
+      "style": Object.merge(this.getStyle(), this.props.style),
     }));
-  }
+  },
 });

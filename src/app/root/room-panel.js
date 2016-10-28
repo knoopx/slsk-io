@@ -15,34 +15,48 @@ const ScrollView = UI.View.ScrollView;
 
 export default React.createClass({
   displayName: "RoomPanel",
+
   propTypes: {
     rooms: ImmutablePropTypes.list,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
   },
+
   getInitialState() {
     return {
-      rooms: this.props.rooms
+      rooms: this.props.rooms,
     };
   },
+
   componentWillReceiveProps(nextProps) {
     return this.setRooms(nextProps.rooms);
   },
+
   setRooms(rooms, fn) {
     if (rooms != null) {
       return this.setState({
-        rooms
+        rooms,
       }, fn);
     }
   },
+
   render() {
     return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(r => -r.users).map(this.renderItem))));
   },
+
   renderItem(room) {
-    return React.createElement(ListItem, {
-      "key": room.name,
-      "onClick": (() => {
-        return this.props.onSelect(room);
-      })
-    }, room.name, " (", room.users, ")");
-  }
+    return React.createElement(
+      ListItem,
+      {
+        "key": room.name,
+
+        "onClick": (() => {
+          return this.props.onSelect(room);
+        }),
+      },
+      room.name,
+      " (",
+      room.users,
+      ")",
+    );
+  },
 });
