@@ -3,13 +3,13 @@ var React = require("react");
 export default React.createClass({
   displayName: "Row",
   mixins: [require('react-addons-pure-render-mixin')],
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       display: "flex",
       flex: 12
     };
   },
-  getStyle: function() {
+  getStyle() {
     return {
       display: this.props.display,
       flex: this.props.flex,
@@ -23,7 +23,7 @@ export default React.createClass({
       alignSelf: this.props.alignSelf
     };
   },
-  render: function() {
+  render() {
     return React.createElement("div", Object.assign({
       "className": "row"
     }, this.props, {

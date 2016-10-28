@@ -3,34 +3,34 @@ var classNames = require("classnames");
 
 export default React.createClass({
   displayName: "TabSet",
-  componentDidMount: function() {
+  componentDidMount() {
     return typeof module.onReload === "function" ? module.onReload(() => {
       return window.previousTabSetState = this.state;
     }) : void 0;
   },
-  getInitialState: function() {
+  getInitialState() {
     return window.previousTabSetState || {
       activeIndex: -1
     };
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.state.activeIndex === -1 && nextProps.children.length > 0) {
       return this.setActiveIndex(0);
     }
   },
-  setActiveIndex: function(index) {
+  setActiveIndex(index) {
     return this.setState({
       activeIndex: index
     });
   },
-  render: function() {
+  render() {
     return React.createElement("div", {
       "className": "tab-view"
     }, React.createElement("div", {
       "className": "tab-view-tab-set"
     }, React.Children.map(this.props.children, this.renderTab)), this.props.children[this.state.activeIndex]);
   },
-  renderTab: function(tab, index) {
+  renderTab(tab, index) {
     return React.createElement("a", {
       "key": index,
       "onClick": (() => {

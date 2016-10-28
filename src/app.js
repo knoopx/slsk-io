@@ -21,14 +21,14 @@ var support = require("./support");
 
 export default React.createClass({
   displayName: "App",
-  pushTab: function(tab, fn) {
+  pushTab(tab, fn) {
     return this.setState(function(state) {
       return {
         tabs: state.tabs.concat(tab)
       };
     }, fn);
   },
-  componentDidMount: function() {
+  componentDidMount() {
     if (typeof module.onReload === "function") {
       module.onReload(() => {
         return window.previousAppState = this.state;
@@ -48,10 +48,10 @@ export default React.createClass({
     this.state.manager.client.on('user left room', this.onUserLeftRoom);
     return this.state.manager.client.on('get user stats', this.onGetUserStats);
   },
-  getInitialState: function() {
+  getInitialState() {
     return window.previousAppState || this.props.state;
   },
-  renderTab: function(props, index) {
+  renderTab(props, index) {
     switch (props.type) {
       case "chatroom":
         var room = this.state.joinedRooms.get(props.name);
@@ -103,7 +103,7 @@ export default React.createClass({
         }, React.createElement(ScrollView, null, React.createElement("table", null, matches.map(renderMatch))));
     }
   },
-  render: function() {
+  render() {
     return React.createElement(Column, null, React.createElement(TopToolbar, {
       "isConnected": this.state.isConnected,
       "onSearch": this.performSearch
@@ -122,13 +122,13 @@ export default React.createClass({
       "onSelect": this.joinRoom
     }))), React.createElement(TransfersPanel, null));
   },
-  onConnected: function(client) {
+  onConnected(client) {
     this.setState({
       isConnected: true
     });
     return this.state.manager.client.login(process.env["USERNAME"], process.env["PASSWORD"]);
   },
-  onSayInChatRoom: function(reply) {
+  onSayInChatRoom(reply) {
     return this.setState(function(state) {
       return {
         joinedRooms: state.joinedRooms.update(reply.room, function(room) {
@@ -144,7 +144,7 @@ export default React.createClass({
       };
     });
   },
-  onUserJoinedRoom: function(reply) {
+  onUserJoinedRoom(reply) {
     return this.setState(function(state) {
       return {
         joinedRooms: state.joinedRooms.update(reply.room, function(room) {
@@ -159,7 +159,7 @@ export default React.createClass({
       };
     });
   },
-  onUserLeftRoom: function(reply) {
+  onUserLeftRoom(reply) {
     return this.setState(function(state) {
       return {
         joinedRooms: state.joinedRooms.update(reply.room, function(room) {
@@ -174,8 +174,8 @@ export default React.createClass({
       };
     });
   },
-  onJoinRoom: function(reply) {},
-  onRoomTickers: function(reply) {
+  onJoinRoom(reply) {},
+  onRoomTickers(reply) {
     return this.setState(function(state) {
       return {
         joinedRooms: state.joinedRooms.update(reply.room, function(room) {
@@ -184,24 +184,24 @@ export default React.createClass({
       };
     });
   },
-  onGetUserStats: function(reply) {},
-  onLogin: function(payload) {
+  onGetUserStats(reply) {},
+  onLogin(payload) {
     return this.setState({
       isLoggedIn: payload.success
     });
   },
-  onGetStatus: function(reply) {},
-  onPriviledgedUsers: function(reply) {
+  onGetStatus(reply) {},
+  onPriviledgedUsers(reply) {
     return this.setState({
       users: Immutable.List(reply.users)
     });
   },
-  onPrivateMessages: function(reply) {},
-  onUserJoinedRoom: function(reply) {},
-  onConnectToPeer: function(reply) {
+  onPrivateMessages(reply) {},
+  onUserJoinedRoom(reply) {},
+  onConnectToPeer(reply) {
     return this.state.manager.peers[reply.username].on('search reply', this.onSearchReply);
   },
-  onSearchReply: function(reply) {
+  onSearchReply(reply) {
     return this.setState(function(state) {
       return {
         searches: state.searches.update(reply.ticket, function(matches) {
@@ -210,12 +210,12 @@ export default React.createClass({
       };
     });
   },
-  onRoomList: function(rooms) {
+  onRoomList(rooms) {
     return this.setState({
       rooms: Immutable.List(rooms)
     });
   },
-  performSearch: function(query) {
+  performSearch(query) {
     var ticket = support.ticket();
     return this.setState(function(state) {
       return {
@@ -230,7 +230,7 @@ export default React.createClass({
       return this.state.manager.client.fileSearch(query, ticket);
     });
   },
-  joinRoom: function(room) {
+  joinRoom(room) {
     if (!this.state.joinedRooms.get(room.name)) {
       return this.setState(function(state) {
         return {

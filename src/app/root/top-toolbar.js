@@ -13,7 +13,7 @@ export default React.createClass({
   propTypes: {
     isConnected: React.PropTypes.bool
   },
-  render: function() {
+  render() {
     return React.createElement(Toolbar, null, React.createElement(Column, null, React.createElement("div", {
       "className": "input-group"
     }, React.createElement("i", {
@@ -29,7 +29,7 @@ export default React.createClass({
       "className": "fa fa-cog"
     })));
   },
-  onKeyDown: function(e) {
+  onKeyDown(e) {
     if (!e.defaultPrevented) {
       switch (e.key) {
         case "Enter":

@@ -3,7 +3,7 @@ var React = require("react");
 export default React.createClass({
   displayName: "Divider",
   mixins: [require('react-addons-pure-render-mixin')],
-  getStyle: function() {
+  getStyle() {
     if ("vertical" in this.props) {
       return {
         borderRight: "1px solid #ccc",
@@ -16,7 +16,7 @@ export default React.createClass({
       };
     }
   },
-  render: function() {
+  render() {
     return React.createElement("div", {
       "className": "divider",
       "style": this.getStyle()

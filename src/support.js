@@ -1,5 +1,5 @@
 export default {
-  ticket: function() {
+  ticket() {
     return Number.random(2147483647);
   }
 };

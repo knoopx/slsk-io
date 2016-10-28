@@ -3,10 +3,10 @@ var Immutable = require("immutable");
 
 export default React.createClass({
   displayName: "Test",
-  getInitialState: function() {
+  getInitialState() {
     return this.props.state;
   },
-  render: function() {
+  render() {
     return React.createElement("div", null, this.state.value);
   }
 });

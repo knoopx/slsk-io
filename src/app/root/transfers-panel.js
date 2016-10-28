@@ -9,7 +9,7 @@ ref = UI.Layout, Row = ref.Row, Column = ref.Column, Divider = ref.Divider, Gutt
 
 export default React.createClass({
   displayName: "TransfersPanel",
-  render: function() {
+  render() {
     return React.createElement(Row, {
       "flex": 2.
     }, React.createElement(Column, null, React.createElement(Toolbar, null, "Downloads")), React.createElement(Divider, {

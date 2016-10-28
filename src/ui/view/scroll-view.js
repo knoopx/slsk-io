@@ -17,7 +17,7 @@ var style = {
 
 export default React.createClass({
   displayName: "ScrollView",
-  render: function() {
+  render() {
     return React.createElement("div", {
       "style": style.container
     }, React.createElement("div", {

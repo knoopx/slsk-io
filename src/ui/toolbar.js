@@ -3,7 +3,7 @@ var Row = require("./layout").Row;
 
 export default React.createClass({
   displayName: "Toolbar",
-  render: function() {
+  render() {
     return React.createElement(Row, Object.assign({
       "className": "toolbar"
     }, this.props));

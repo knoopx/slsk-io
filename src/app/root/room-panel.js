@@ -19,27 +19,27 @@ export default React.createClass({
     rooms: ImmutablePropTypes.list,
     onSelect: React.PropTypes.func
   },
-  getInitialState: function() {
+  getInitialState() {
     return {
       rooms: this.props.rooms
     };
   },
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps(nextProps) {
     return this.setRooms(nextProps.rooms);
   },
-  setRooms: function(rooms, fn) {
+  setRooms(rooms, fn) {
     if (rooms != null) {
       return this.setState({
         rooms: rooms
       }, fn);
     }
   },
-  render: function() {
+  render() {
     return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(function(r) {
       return -r.users;
     }).map(this.renderItem))));
   },
-  renderItem: function(room) {
+  renderItem(room) {
     return React.createElement(ListItem, {
       "key": room.name,
       "onClick": (() => {
