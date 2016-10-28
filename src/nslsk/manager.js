@@ -3,17 +3,17 @@
  * Module dependencies.
  */
 
-var net = require('net');
+const net = require('net');
 
-var crypto = require('crypto');
-var util = require('util');
-var inspect = util.inspect;
-var debug = require('debug')('nslsk:manager');
-var EventEmitter = require('events').EventEmitter;
-var Message = require('./message');
-var Client = require('./client');
-var Peer = require('./peer');
-var utils = require('./utils');
+const crypto = require('crypto');
+const util = require('util');
+const inspect = util.inspect;
+const debug = require('debug')('nslsk:manager');
+const EventEmitter = require('events').EventEmitter;
+const Message = require('./message');
+const Client = require('./client');
+const Peer = require('./peer');
+const utils = require('./utils');
 
 export default Manager;
 
@@ -22,7 +22,7 @@ export default Manager;
  */
 
 function Manager(port) {
-  var self = this;
+  const self = this;
 
   EventEmitter.call(this);
 
@@ -35,10 +35,10 @@ function Manager(port) {
   this.searches = {};
 
   this.client.on('connect', client => {
-    var num = 0;
+    let num = 0;
     self.peer = net.createServer(socket => {
       debug('[%s] connection from peer %s:%s', ++num, socket.remoteAddress, socket.remotePort);
-      var peer = new Peer(socket);
+      const peer = new Peer(socket);
       peer.infoRequest();
     });
     self.peer.listen(self.port, () => {
@@ -72,7 +72,7 @@ Manager.prototype.onLogin = function(message) {
  */
 
 Manager.prototype.onPriviledgedUsers = function(message) {
-  var client = this.client;
+  const client = this.client;
   message.users.forEach((username, index) => {
     // client.getStatus(username);
   });
@@ -91,11 +91,7 @@ Manager.prototype.onGetStatus = function(message) {
  */
 
 Manager.prototype.onConnectToPeer = function(message) {
-  var ip = message.ip
-    , port = message.port
-    , username = message.username
-    , token = message.token
-    , peer = this.peers[username] = new Peer({ host: ip, port: port });
+  const ip = message.ip, port = message.port, username = message.username, token = message.token, peer = this.peers[username] = new Peer({ host: ip, port: port });
 
   peer.on('connect', peer => {
     debug('connect with %s', username);

@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var net = require('net');
+const net = require('net');
 
-var Stream = require('stream');
-var Buffers = require('buffers');
-var debug = require('debug')('nslsk:node');
-var Message = require('./message');
+const Stream = require('stream');
+const Buffers = require('buffers');
+const debug = require('debug')('nslsk:node');
+const Message = require('./message');
 
 export default Node;
 
@@ -58,9 +58,7 @@ Node.prototype.__proto__ = Stream.prototype;
  */
 
 Node.prototype.bind = function(socket) {
-  var self = this
-    , remain = 0
-    , buffers = new Buffers();
+  let self = this, remain = 0, buffers = new Buffers();
   
   socket.on('data', data => {
     debug('[%s] data: %s:%s (%s bytes received)', self.type, socket.remoteAddress, socket.remotePort, data.length);
@@ -70,7 +68,7 @@ Node.prototype.bind = function(socket) {
     if (remain < 1) remain = buffers.splice(0, 4).toBuffer().readUInt32LE(0);
     if (remain > buffers.length) return;
     
-    var message = new Message(buffers.splice(0, remain));
+    const message = new Message(buffers.splice(0, remain));
     
     message.decode(self.type, (err, decoded) => {
       // TODO: handle error.

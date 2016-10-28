@@ -18,13 +18,13 @@
  * 52	Upload Queue Notification
  */
 
-var code = module.exports = {};
+const code = module.exports = {};
 
 /**
  * 0 - Pierce firewall.
  */
 
-var PIERCE_FIREWALL = code.PIERCE_FIREWALL = 0;
+const PIERCE_FIREWALL = code.PIERCE_FIREWALL = 0;
 code[PIERCE_FIREWALL] = { name: 'pierce firewall' };
 code[PIERCE_FIREWALL].decode = function(message) {
   return {
@@ -36,7 +36,7 @@ code[PIERCE_FIREWALL].decode = function(message) {
  * 1 - Peer init.
  */
 
-var PEER_INIT = code.PEER_INIT = 1;
+const PEER_INIT = code.PEER_INIT = 1;
 code[PEER_INIT] = { name: 'peer init' };
 code[PEER_INIT].decode = function(message) {
   return {
@@ -50,7 +50,7 @@ code[PEER_INIT].decode = function(message) {
  * 4 - Shares request.
  */
 
-var SHARES_REQUEST = code.SHARES_REQUEST = 4;
+const SHARES_REQUEST = code.SHARES_REQUEST = 4;
 code[SHARES_REQUEST] = { name: 'shares request' };
 code[SHARES_REQUEST].decode = function(message) {
   return {};  // empty message.
@@ -60,11 +60,11 @@ code[SHARES_REQUEST].decode = function(message) {
  * 5 - Shares reply.
  */
 
-var SHARES_REPLY = code.SHARES_REPLY = 5;
+const SHARES_REPLY = code.SHARES_REPLY = 5;
 code[SHARES_REPLY] = { name: 'shares reply' };
 code[SHARES_REPLY].decode = function(message, callback) {
   message.decompress((err, message) => {
-    var dirs = message.int32();
+    const dirs = message.int32();
     callback.call(message, err, {
       // TODO:
     });
@@ -75,7 +75,7 @@ code[SHARES_REPLY].decode = function(message, callback) {
  * 8 - Search request.
  */
 
-var SEARCH_REQUEST = code.SEARCH_REQUEST = 8;
+const SEARCH_REQUEST = code.SEARCH_REQUEST = 8;
 code[SEARCH_REQUEST] = { name: 'search request' };
 code[SEARCH_REQUEST].decode = function(message) {
   return {
@@ -88,16 +88,13 @@ code[SEARCH_REQUEST].decode = function(message) {
  * 9 - Search reply.
  */
 
-var SEARCH_REPLY = code.SEARCH_REPLY = 9;
+const SEARCH_REPLY = code.SEARCH_REPLY = 9;
 code[SEARCH_REPLY] = { name: 'search reply' };
 code[SEARCH_REPLY].decode = function(message, callback) {
   message.decompress((err, message) => {
-    var user = message.string()
-      , ticket = message.int32()
-      , count = message.int32()
-      , results = [];
+    const user = message.string(), ticket = message.int32(), count = message.int32(), results = [];
 
-    for (var i = 0; i < count; ++i) {
+    for (let i = 0; i < count; ++i) {
       message.uchar(); // forward cursor. (what?)
 
       results[i] = {
@@ -107,8 +104,8 @@ code[SEARCH_REPLY].decode = function(message, callback) {
         attributes: []
       };
 
-      var attrCount = message.int32();
-      for (var j = 0; j < attrCount; ++j) {
+      const attrCount = message.int32();
+      for (let j = 0; j < attrCount; ++j) {
         results[i].attributes[j] = {
           place: message.int32(),
           attribute: message.int32()
@@ -131,7 +128,7 @@ code[SEARCH_REPLY].decode = function(message, callback) {
  * 15 - Info request.
  */
 
-var INFO_REQUEST = code.INFO_REQUEST = 15;
+const INFO_REQUEST = code.INFO_REQUEST = 15;
 code[INFO_REQUEST] = { name: 'info request' };
 code[INFO_REQUEST].decode = function(message) {
   // TODO:

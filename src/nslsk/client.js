@@ -3,24 +3,24 @@
  * Module dependencies.
  */
 
-var crypto = require('crypto');
+const crypto = require('crypto');
 
-var Buffers = require('buffers');
-var message = require('./message');
-var utils = require('./utils');
-var Node = require('./node');
+const Buffers = require('buffers');
+const message = require('./message');
+const utils = require('./utils');
+const Node = require('./node');
 
 /**
  * Soulseek client version.
  */
 
-var version = 182;
+const version = 182;
 
 /**
  * Soulseek client minior version.
  */
 
-var minor = 1;
+const minor = 1;
 
 export default Client;
 

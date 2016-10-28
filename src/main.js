@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import App from "./app";
 import state from "./state";
 
-var app = React.createElement(App, {
+const app = React.createElement(App, {
   state: state
 });
 

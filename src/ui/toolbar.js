@@ -1,5 +1,5 @@
 import React from "react";
-var Row = require("./layout").Row;
+const Row = require("./layout").Row;
 
 export default React.createClass({
   displayName: "Toolbar",

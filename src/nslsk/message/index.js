@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var debug = require('debug')('nslsk:message');
+const debug = require('debug')('nslsk:message');
 
-var zlib = require('zlib');
-var int53 = require('int53');
-var Buffers = require('buffers');
+const zlib = require('zlib');
+const int53 = require('int53');
+const Buffers = require('buffers');
 
 export default Message;
 
@@ -61,14 +61,14 @@ function Message(buffers) {
 
 Message.prototype.uint32 = function(val) {
   if (val) {
-    var buf = new Buffer(4);
+    const buf = new Buffer(4);
 
     buf.writeUInt32LE(val, 0);
     this._buffers.push(buf);
 
     return this;
   }
-  var ret = this._buffers.slice(this._cursor, this._cursor + 4).readUInt32LE(0);
+  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readUInt32LE(0);
   this._cursor += 4;
   return ret;
 };
@@ -83,7 +83,7 @@ Message.prototype.uchar = function(val) {
     this._buffers.push(new Buffer([val]));
     return this;
   }
-  var ret = this._buffers.get(this._cursor);
+  const ret = this._buffers.get(this._cursor);
   ++this._cursor;
   return ret;
 };
@@ -95,15 +95,15 @@ Message.prototype.uchar = function(val) {
 
 Message.prototype.string = function(val) {
   if (val) {
-    var buf = new Buffer(val, 'utf8');
+    const buf = new Buffer(val, 'utf8');
 
     this.uint32(buf.length);
     this._buffers.push(buf);
 
     return this;
   }
-  var len = this.uint32();
-  var ret = this._buffers.slice(this._cursor, this._cursor + len).toString('utf8');
+  const len = this.uint32();
+  const ret = this._buffers.slice(this._cursor, this._cursor + len).toString('utf8');
   this._cursor += len;
   return ret;
 };
@@ -115,14 +115,14 @@ Message.prototype.string = function(val) {
 
 Message.prototype.int32 = function(val) {
   if (val) {
-    var buf = new Buffer(4);
+    const buf = new Buffer(4);
 
     buf.writeInt32LE(val, 0);
     this._buffers.push(buf);
 
     return this;
   }
-  var ret = this._buffers.slice(this._cursor, this._cursor + 4).readInt32LE(0);
+  const ret = this._buffers.slice(this._cursor, this._cursor + 4).readInt32LE(0);
   this._cursor += 4;
   return ret;
 };
@@ -136,7 +136,7 @@ Message.prototype.int64 = function(val) {
   if (val) {
     // TODO:
   }
-  var buf = this._buffers.slice(this._cursor, this._cursor + 8);
+  const buf = this._buffers.slice(this._cursor, this._cursor + 8);
   this._cursor += 8;
   return int53.readUInt64LE(buf)
   // return (buf.readUInt32LE() << 8) + buf.readUInt32LE();
@@ -159,8 +159,7 @@ Message.prototype.bool = function(val) {
  */
 
 Message.prototype.ip = function() {
-  var ip = this.uint32()
-    , buf = new Buffer(4);
+  const ip = this.uint32(), buf = new Buffer(4);
 
   buf.writeUInt32BE(ip, 0);
   return [buf[0], buf[1], buf[2], buf[3]].join('.');
@@ -184,7 +183,7 @@ Message.prototype.push = function(buffer) {
  */
 
 Message.prototype.decompress = function(callback) {
-  var buf = this._buffers.splice(4).toBuffer();
+  const buf = this._buffers.splice(4).toBuffer();
 
   zlib.unzip(buf, (err, buf) => {
     if (err) {
@@ -207,7 +206,7 @@ Message.prototype.decompress = function(callback) {
 
 Message.prototype.decode = function(type, callback) {
   this._cursor = 0;
-  var code = this.uint32();
+  const code = this.uint32();
 
   debug('%s:%s', type, code/*, this._buffers */);
 
@@ -236,7 +235,7 @@ Message.prototype.decode = function(type, callback) {
       message.decode.call(this, this, callback);
       break;
     case 1:
-      var decoded = message.decode.call(this, this);
+      const decoded = message.decode.call(this, this);
       callback(null, decoded);
       break;
     default:
@@ -251,7 +250,7 @@ Message.prototype.decode = function(type, callback) {
  */
 
 Message.prototype.end = function(callback) {
-  var buf = new Buffer(4);
+  const buf = new Buffer(4);
 
   buf.writeUInt32LE(this._buffers.length, 0);
   this._buffers.unshift(buf);

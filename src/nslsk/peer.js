@@ -3,9 +3,9 @@
  * Module dependencies.
  */
 
-var Node = require('./node');
+const Node = require('./node');
 
-var message = require('./message');
+const message = require('./message');
 
 export default Peer;
 

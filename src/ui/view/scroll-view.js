@@ -1,6 +1,6 @@
 import React from "react";
 
-var style = {
+const style = {
   container: {
     overflow: "auto",
     position: "relative",
