@@ -6,7 +6,7 @@ import App from "./app";
 import state from "./state";
 
 const app = React.createElement(App, {
-  state: state
+  state
 });
 
 ReactDOM.render(app, document.querySelector("#root"));

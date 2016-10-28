@@ -60,7 +60,7 @@ export default React.createClass({
 
         return React.createElement(Tab, {
           "key": index,
-          "title": title
+          title
         }, React.createElement(Row, null, React.createElement(Column, {
           "flex": "3"
         }, React.createElement(ScrollView, null, React.createElement(List, null, room.users.sortBy(u => u.user).map(user => React.createElement(ListItem, {
@@ -89,7 +89,7 @@ export default React.createClass({
 
         return React.createElement(Tab, {
           "key": index,
-          "title": title
+          title
         }, React.createElement(ScrollView, null, React.createElement("table", null, matches.map(renderMatch))));
     }
   },
@@ -186,8 +186,8 @@ export default React.createClass({
     }), () => {
       this.pushTab({
         type: "search",
-        ticket: ticket,
-        query: query
+        ticket,
+        query
       });
       return this.state.manager.client.fileSearch(query, ticket);
     });

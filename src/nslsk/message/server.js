@@ -71,13 +71,13 @@ code[LOGIN].decode = function(message) {
   
   if (!success) {
     return {
-      success: success,
+      success,
       reason: message.string()
     };
   }
   
   return {
-    success: success,
+    success,
     greet: message.string()
   };
 };
@@ -115,14 +115,14 @@ code[ADD_USER].decode = function(message) {
   
   if (!exists) {
     return {
-      username: username,
-      exists: exists
+      username,
+      exists
     };
   }
   
   return {
-    username: username,
-    exists: exists,
+    username,
+    exists,
     status: message.int32(),
     avgspeed: message.int32(),
     downloadnum: message.int64(),
@@ -359,7 +359,7 @@ code[PRIVILEGED_USERS].decode = function(message) {
     users[i] = message.string();
   }
   
-  return { users: users };
+  return { users };
 };
 
 /**
@@ -437,8 +437,8 @@ code[ROOM_TICKERS].decode = function(message) {
   }
   
   return {
-    room: room,
-    users: users
+    room,
+    users
   };
 };
 

@@ -91,7 +91,7 @@ Manager.prototype.onGetStatus = function(message) {
  */
 
 Manager.prototype.onConnectToPeer = function(message) {
-  const ip = message.ip, port = message.port, username = message.username, token = message.token, peer = this.peers[username] = new Peer({ host: ip, port: port });
+  const ip = message.ip, port = message.port, username = message.username, token = message.token, peer = this.peers[username] = new Peer({ host: ip, port });
 
   peer.on('connect', peer => {
     debug('connect with %s', username);

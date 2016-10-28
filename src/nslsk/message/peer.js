@@ -114,9 +114,9 @@ code[SEARCH_REPLY].decode = function(message, callback) {
     }
 
     callback.call(message, err, {
-      user: user,
-      ticket: ticket,
-      results: results,
+      user,
+      ticket,
+      results,
       slotfree: message.uchar(),
       avgspeed: message.int32(),
       queueLength: message.int64()

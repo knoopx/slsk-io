@@ -30,7 +30,7 @@ export default React.createClass({
   setRooms(rooms, fn) {
     if (rooms != null) {
       return this.setState({
-        rooms: rooms
+        rooms
       }, fn);
     }
   },
