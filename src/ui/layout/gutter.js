@@ -15,7 +15,7 @@ export default React.createClass({
   },
   getStyle() {
     return {
-      width: this.state.size + "px",
+      width: `${this.state.size}px`,
       display: "inline-block"
     };
   },

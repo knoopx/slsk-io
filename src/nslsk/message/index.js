@@ -221,11 +221,11 @@ Message.prototype.decode = function(type, callback) {
       var message = Message.DISTRIBUTED[code];
       break;
     default:
-      throw new TypeError('Unknown message type [' + type + ']');
+      throw new TypeError(`Unknown message type [${type}]`);
   }
 
   if (!message) {
-    throw new Error('Unknown ' + type + ' message code [' + code + ']');
+    throw new Error(`Unknown ${type} message code [${code}]`);
   }
 
   this.name = message.name;
