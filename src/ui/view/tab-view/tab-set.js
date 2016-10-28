@@ -32,12 +32,12 @@ export default React.createClass({
     return React.createElement(
       "div",
       {
-        "className": "tab-view",
+        className: "tab-view",
       },
       React.createElement(
         "div",
         {
-          "className": "tab-view-tab-set",
+          className: "tab-view-tab-set",
         },
         React.Children.map(this.props.children, this.renderTab),
       ),
@@ -49,13 +49,13 @@ export default React.createClass({
     return React.createElement(
       "a",
       {
-        "key": index,
+        key: index,
 
-        "onClick": (() => {
+        onClick: (() => {
           return this.setActiveIndex(index);
         }),
 
-        "className": classNames(
+        className: classNames(
           "tab-view-tab-set-tab",
           {
             active: this.state.activeIndex === index,

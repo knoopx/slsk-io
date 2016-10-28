@@ -27,8 +27,8 @@ export default React.createClass({
     return React.createElement(
       "div",
       {
-        "className": "gutter",
-        "style": this.getStyle(),
+        className: "gutter",
+        style: this.getStyle(),
       },
     );
   },

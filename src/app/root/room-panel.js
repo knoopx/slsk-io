@@ -55,9 +55,9 @@ export default React.createClass({
     return React.createElement(
       ListItem,
       {
-        "key": room.name,
+        key: room.name,
 
-        "onClick": (() => {
+        onClick: (() => {
           return this.props.onSelect(room);
         }),
       },

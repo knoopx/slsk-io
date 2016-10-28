@@ -23,12 +23,12 @@ export default React.createClass({
     return React.createElement(
       "div",
       {
-        "style": style.container,
+        style: style.container,
       },
       React.createElement(
         "div",
         {
-          "style": style.inner,
+          style: style.inner,
         },
         this.props.children,
       ),

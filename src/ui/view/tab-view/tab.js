@@ -5,7 +5,7 @@ export default React.createClass({
 
   render() {
     return React.createElement("div", Object.assign({
-      "className": "tab-view-tab",
+      className: "tab-view-tab",
     }, this.props));
   },
 });

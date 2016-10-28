@@ -19,13 +19,13 @@ export default React.createClass({
     return React.createElement(
       Row,
       {
-        "flex": 2.,
+        flex: 2.,
       },
       React.createElement(Column, null, React.createElement(Toolbar, null, "Downloads")),
       React.createElement(
         Divider,
         {
-          "vertical": true,
+          vertical: true,
         },
       ),
       React.createElement(Column, null, React.createElement(Toolbar, null, "Uploads")),

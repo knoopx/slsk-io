@@ -27,19 +27,19 @@ export default React.createClass({
     return React.createElement(Column, null, React.createElement(Toolbar, null, React.createElement(
       Row,
       {
-        "alignItems": "center",
+        alignItems: "center",
       },
       React.createElement(Column, null, React.createElement("span", null, "Users (", this.props.users.count(), ")")),
       React.createElement(Button, null, React.createElement(
         "i",
         {
-          "className": "fa fa-plus",
+          className: "fa fa-plus",
         },
       )),
     )), React.createElement(ScrollView, null, React.createElement(List, null, this.props.users.sort().map(user => React.createElement(
       ListItem,
       {
-        "key": user,
+        key: user,
       },
       user,
     )))));

@@ -24,36 +24,36 @@ export default React.createClass({
     return React.createElement(Toolbar, null, React.createElement(Column, null, React.createElement(
       "div",
       {
-        "className": "input-group",
+        className: "input-group",
       },
       React.createElement(
         "i",
         {
-          "className": "fa fa-search",
+          className: "fa fa-search",
         },
       ),
       React.createElement(Gutter, null),
       React.createElement(
         "input",
         {
-          "placeholder": "Search",
-          "onKeyDown": this.onKeyDown,
+          placeholder: "Search",
+          onKeyDown: this.onKeyDown,
         },
       ),
     )), React.createElement(
       Gutter,
       {
-        "size": 15.,
+        size: 15.,
       },
     ), React.createElement(Button, null, (this.props.isConnected ? "Connected" : "Disconnected")), React.createElement(
       Gutter,
       {
-        "size": 5.,
+        size: 5.,
       },
     ), React.createElement(Button, null, React.createElement(
       "i",
       {
-        "className": "fa fa-cog",
+        className: "fa fa-cog",
       },
     )));
   },

@@ -6,7 +6,7 @@ export default React.createClass({
 
   render() {
     return React.createElement("div", Object.assign({
-      "className": "btn btn-default",
+      className: "btn btn-default",
     }, this.props));
   },
 });

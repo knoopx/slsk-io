@@ -29,14 +29,14 @@ export default React.createClass({
     return React.createElement(
       ListItem,
       {
-        "key": index,
+        key: index,
       },
       React.createElement(Row, null, React.createElement(
         Column,
         {
-          "flex": "2",
+          flex: "2",
 
-          "style": {
+          style: {
             textAlign: "right",
           },
         },
@@ -44,7 +44,7 @@ export default React.createClass({
       ), React.createElement(Gutter, null), React.createElement(
         Column,
         {
-          "flex": "10",
+          flex: "10",
         },
         message.message,
       )),

@@ -5,7 +5,7 @@ export default React.createClass({
 
   render() {
     return React.createElement("div", Object.assign({
-      "className": "list-item",
+      className: "list-item",
     }, this.props));
   },
 });

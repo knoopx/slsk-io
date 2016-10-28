@@ -80,30 +80,30 @@ export default React.createClass({
         var title = React.createElement(Row, null, React.createElement(
           "i",
           {
-            "className": "fa fa-hashtag",
+            className: "fa fa-hashtag",
           },
         ), React.createElement(Gutter, null), React.createElement("i", null), React.createElement("span", null, room.name, " (", room.users.count(), ")"));
 
         return React.createElement(
           Tab,
           {
-            "key": index,
+            key: index,
             title,
           },
           React.createElement(Row, null, React.createElement(
             Column,
             {
-              "flex": "3",
+              flex: "3",
             },
             React.createElement(ScrollView, null, React.createElement(List, null, room.users.sortBy(u => u.user).map(user => React.createElement(
               ListItem,
               {
-                "key": user.user,
+                key: user.user,
               },
               React.createElement("span", null, React.createElement("strong", null, user.user), React.createElement("br", null), React.createElement(
                 "small",
                 {
-                  "className": "text-muted",
+                  className: "text-muted",
                 },
                 user.tickers,
               )),
@@ -111,17 +111,17 @@ export default React.createClass({
           ), React.createElement(
             Divider,
             {
-              "vertical": true,
+              vertical: true,
             },
           ), React.createElement(
             Column,
             {
-              "flex": "9",
+              flex: "9",
             },
             React.createElement(ScrollView, null, React.createElement(
               Chat,
               {
-                "messages": room.messages,
+                messages: room.messages,
               },
             )),
           )),
@@ -133,7 +133,7 @@ export default React.createClass({
           return match.results.map((r, index) => React.createElement(
             "tr",
             {
-              "key": index,
+              key: index,
             },
             React.createElement("td", null, React.createElement("strong", null, match.user)),
             React.createElement("td", null, Path.basename(r.filename.replace(/\\/g, "/"))),
@@ -145,14 +145,14 @@ export default React.createClass({
         var title = React.createElement(Row, null, React.createElement(
           "i",
           {
-            "className": "fa fa-search",
+            className: "fa fa-search",
           },
         ), React.createElement(Gutter, null), React.createElement("span", null, props.query, " (", matches.map(m => m.results.length).toArray().sum(), ")"));
 
         return React.createElement(
           Tab,
           {
-            "key": index,
+            key: index,
             title,
           },
           React.createElement(ScrollView, null, React.createElement("table", null, matches.map(renderMatch))),
@@ -164,18 +164,18 @@ export default React.createClass({
     return React.createElement(Column, null, React.createElement(
       TopToolbar,
       {
-        "isConnected": this.state.isConnected,
-        "onSearch": this.performSearch,
+        isConnected: this.state.isConnected,
+        onSearch: this.performSearch,
       },
     ), React.createElement(Row, null, React.createElement(
       Column,
       {
-        "flex": 9.,
+        flex: 9.,
       },
       React.createElement(
         Row,
         {
-          "flex": 10.,
+          flex: 10.,
         },
         React.createElement(TabSet, null, this.state.tabs.map(this.renderTab)),
       ),
@@ -183,25 +183,25 @@ export default React.createClass({
     ), React.createElement(
       Divider,
       {
-        "vertical": true,
+        vertical: true,
       },
     ), React.createElement(
       Column,
       {
-        "flex": 3.,
+        flex: 3.,
       },
       React.createElement(
         UsersPanel,
         {
-          "users": this.state.users,
+          users: this.state.users,
         },
       ),
       React.createElement(Divider, null),
       React.createElement(
         RoomPanel,
         {
-          "rooms": this.state.rooms,
-          "onSelect": this.joinRoom,
+          rooms: this.state.rooms,
+          onSelect: this.joinRoom,
         },
       ),
     )), React.createElement(TransfersPanel, null));

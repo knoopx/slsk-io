@@ -6,7 +6,7 @@ export default React.createClass({
 
   render() {
     return React.createElement(Row, Object.assign({
-      "className": "toolbar",
+      className: "toolbar",
     }, this.props));
   },
 });
