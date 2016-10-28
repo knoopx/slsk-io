@@ -3,11 +3,12 @@
  * Module dependencies.
  */
 
-var crypto = require('crypto')
-  , Buffers = require('buffers')
-  , message = require('./message')
-  , utils = require('./utils')
-  , Node = require('./node');
+var crypto = require('crypto');
+
+var Buffers = require('buffers');
+var message = require('./message');
+var utils = require('./utils');
+var Node = require('./node');
 
 /**
  * Soulseek client version.

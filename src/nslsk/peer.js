@@ -3,8 +3,9 @@
  * Module dependencies.
  */
 
-var Node = require('./node')
-  , message = require('./message');
+var Node = require('./node');
+
+var message = require('./message');
 
 export default Peer;
 

@@ -3,11 +3,12 @@
  * Module dependencies.
  */
 
-var net = require('net')
-  , Stream = require('stream')
-  , Buffers = require('buffers')
-  , debug = require('debug')('nslsk:node')
-  , Message = require('./message');
+var net = require('net');
+
+var Stream = require('stream');
+var Buffers = require('buffers');
+var debug = require('debug')('nslsk:node');
+var Message = require('./message');
 
 export default Node;
 

@@ -3,10 +3,11 @@
  * Module dependencies.
  */
 
-var debug = require('debug')('nslsk:message')
-  , zlib = require('zlib')
-  , int53 = require('int53')
-  , Buffers = require('buffers');
+var debug = require('debug')('nslsk:message');
+
+var zlib = require('zlib');
+var int53 = require('int53');
+var Buffers = require('buffers');
 
 export default Message;
 

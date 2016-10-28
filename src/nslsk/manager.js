@@ -3,16 +3,17 @@
  * Module dependencies.
  */
 
-var net = require('net')
-  , crypto = require('crypto')
-  , util = require('util')
-  , inspect = util.inspect
-  , debug = require('debug')('nslsk:manager')
-  , EventEmitter = require('events').EventEmitter
-  , Message = require('./message')
-  , Client = require('./client')
-  , Peer = require('./peer')
-  , utils = require('./utils');
+var net = require('net');
+
+var crypto = require('crypto');
+var util = require('util');
+var inspect = util.inspect;
+var debug = require('debug')('nslsk:manager');
+var EventEmitter = require('events').EventEmitter;
+var Message = require('./message');
+var Client = require('./client');
+var Peer = require('./peer');
+var utils = require('./utils');
 
 export default Manager;
 
