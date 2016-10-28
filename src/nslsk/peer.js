@@ -1,11 +1,6 @@
 
-/**
- * Module dependencies.
- */
-
-const Node = require('./node');
-
-const message = require('./message');
+import Node from './node';
+import message from './message';
 
 export default Peer;
 

@@ -1,16 +1,12 @@
 
-/**
- * Module dependencies.
- */
-
-const net = require('net');
-
-const util = require('util');
+import net from 'net';
+import util from 'util';
 const inspect = util.inspect;
-const debug = require('debug')('nslsk:manager');
+import debugImport from 'debug';
+const debug = debugImport('nslsk:manager');
 const EventEmitter = require('events').EventEmitter;
-const Client = require('./client');
-const Peer = require('./peer');
+import Client from './client';
+import Peer from './peer';
 
 export default Manager;
 

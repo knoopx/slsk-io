@@ -1,14 +1,10 @@
 
-/**
- * Module dependencies.
- */
-
-const net = require('net');
-
-const Stream = require('stream');
-const Buffers = require('buffers');
-const debug = require('debug')('nslsk:node');
-const Message = require('./message');
+import net from 'net';
+import Stream from 'stream';
+import Buffers from 'buffers';
+const debug = debugImport('nslsk:node');
+import debugImport from 'debug';
+import Message from './message';
 
 export default Node;
 

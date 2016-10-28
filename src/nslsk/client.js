@@ -1,13 +1,8 @@
 
-/**
- * Module dependencies.
- */
-
-const crypto = require('crypto');
-
-const message = require('./message');
-const utils = require('./utils');
-const Node = require('./node');
+import crypto from 'crypto';
+import message from './message';
+import utils from './utils';
+import Node from './node';
 
 /**
  * Soulseek client version.
