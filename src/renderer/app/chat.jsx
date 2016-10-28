@@ -16,9 +16,9 @@ export default class Chat extends React.Component {
   renderMessage = (message, index) => (
     <ListItem key={index}>
       <Row>
-        <Column flex="2" style={{ textAlign: 'right' }}><strong>{ message.username }</strong></Column>
+        <Column style={{ flex: 2, textAlign: 'right' }}><strong>{ message.username }</strong></Column>
         <Gutter />
-        <Column flex="10">
+        <Column style={{ flex: 10 }}>
           { message.message }
         </Column>
       </Row>

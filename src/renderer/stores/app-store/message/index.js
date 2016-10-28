@@ -1,41 +1,12 @@
+import zlib from 'zlib'
+import int53 from 'int53'
+import Buffers from 'buffers'
 
-/**
- * Module dependencies.
- */
+export default class Message {
+  static SERVER = require('./server')
+  static PEER = require('./peer')
+  static DISTRIBUTED = require('./distributed')
 
-const debug = require('debug')('nslsk:message')
-
-import zlib from 'zlib';
-import int53 from 'int53';
-import Buffers from 'buffers';
-
-export default Message
-
-/**
- * Server message.
- */
-
-Message.SERVER = require('./server')
-
-/**
- * Peer message.
- */
-
-Message.PEER = require('./peer')
-
-/**
- * Distributed message.
- */
-
-Message.DISTRIBUTED = require('./distributed')
-
-/**
- * Message constructor.
- *
- * @param {Buffers|Number} [optional]
- */
-
-class Message {
   constructor(buffers) {
     if (!(this instanceof Message)) {
       return new Message(buffers)
@@ -210,7 +181,7 @@ class Message {
     this._cursor = 0
     const code = this.uint32()
 
-    debug('%s:%s', type, code/* , this._buffers */)
+    console.debug(type, code)
 
     switch (type) {
       case 'server':

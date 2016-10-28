@@ -1,30 +1,21 @@
 import React from 'react'
+import { sortBy } from 'lodash'
 import { Toolbar, Lists, Layout, View } from '../ui'
+import { appStore } from '../stores'
 
 const { List, ListItem } = Lists
 const { ScrollView } = View
 const { Column } = Layout
 
+
 export default class RoomPanel extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    return this.setRooms(nextProps.rooms)
-  }
-
-  setRooms = (rooms, fn) => {
-    if (rooms != null) {
-      return this.setState({
-        rooms
-      }, fn)
-    }
-  }
-
   render() {
     return (
       <Column>
-        <Toolbar>Rooms ({ this.state.rooms.count() })</Toolbar>
+        <Toolbar>Rooms ({ appStore.rooms.length })</Toolbar>
         <ScrollView>
           <List>
-            { this.state.rooms.sortBy(r => -r.users).map(this.renderItem) }
+            {sortBy(appStore.rooms, 'users').map(this.renderItem)}
           </List>
         </ScrollView>
       </Column>
@@ -32,7 +23,7 @@ export default class RoomPanel extends React.Component {
   }
 
   renderItem = room => (
-    <ListItem key={room.name} onClick={() => { this.props.onSelect(room) }}>
+    <ListItem key={room.name} onClick={() => appStore.client.joinRoom(room.name)}>
       {room.name} ({room.users})
     </ListItem>
   )

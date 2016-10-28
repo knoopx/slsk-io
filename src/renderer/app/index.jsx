@@ -1,19 +1,27 @@
 import React from 'react'
+import Path from 'path'
+import { observer } from 'mobx-react'
+import { observable } from 'mobx'
 import { AppContainer } from 'react-hot-loader'
 
+import Chat from './chat'
 import TopToolbar from './top-toolbar'
 import UsersPanel from './users-panel'
 import RoomPanel from './room-panel'
 import TransfersPanel from './transfers-panel'
 
-import { TabSet, Toolbar, Lists, Buttons, Layout, View } from '../ui'
+import { Toolbar, Tabs, Lists, Buttons, Layout, View } from '../ui'
 const { Button } = Buttons
 const { List, ListItem } = Lists
 const { ScrollView } = View
-const { Row, Column, Divider } = Layout
+const { Row, Column, Gutter, Divider } = Layout
+const { TabSet, Tab } = View.TabView
 
 
+@observer
 export default class App extends React.Component {
+  @observable tabs = []
+
   // componentDidMount() {
   //   this.state.manager.on('connect', this.onConnected)
   //   this.state.manager.client.on('login', this.onLogin)
@@ -41,26 +49,33 @@ export default class App extends React.Component {
   //     case 'chatroom':
   //       const room = this.state.joinedRooms.get(props.name)
   //
-  //       var title = (<Row><i className="fa fa-hashtag" />
-  //         <Gutter /><i /><span>{ room.name } ({ room.users.count() })</span></Row>)
-  //
-  //       return (<Tab key={index} title={title}>
+  //       var title = (
   //         <Row>
-  //           <Column flex="3">
-  //             <ScrollView>
-  //               <List>
-  //                 { room.users.sortBy(u => u.user).map(user => <ListItem key={user.user}><span><strong>{ user.user }</strong><br /><small className="text-muted">{ user.tickers }</small></span></ListItem>) }
-  //               </List>
-  //             </ScrollView>
-  //           </Column>
-  //           <Divider vertical />
-  //           <Column flex="9">
-  //             <ScrollView>
-  //               <Chat messages={room.messages} />
-  //             </ScrollView>
-  //           </Column>
+  //           <i className="fa fa-hashtag" />
+  //           <Gutter />
+  //           <span>{ room.name } ({ room.users.length })</span>
   //         </Row>
-  //       </Tab>)
+  //       )
+  //
+  //       return (
+  //         <Tab key={index} title={title}>
+  //           <Row>
+  //             <Column flex="3">
+  //               <ScrollView>
+  //                 <List>
+  //                   { room.users.sortBy(u => u.user).map(user => <ListItem key={user.user}><span><strong>{ user.user }</strong><br /><small className="text-muted">{ user.tickers }</small></span></ListItem>) }
+  //                 </List>
+  //               </ScrollView>
+  //             </Column>
+  //             <Divider vertical />
+  //             <Column flex="9">
+  //               <ScrollView>
+  //                 <Chat messages={room.messages} />
+  //               </ScrollView>
+  //             </Column>
+  //           </Row>
+  //         </Tab>
+  //       )
   //     case 'search':
   //       const matches = this.state.searches.get(props.ticket)
   //
@@ -82,35 +97,37 @@ export default class App extends React.Component {
   //       var title = (<Row><i className="fa fa-search" />
   //         <Gutter /><span>{ props.query } ({ matches.map(m => m.results.length).toArray().sum() })</span></Row>)
   //
-  //       return (<Tab key={index} title={title}>
-  //         <ScrollView>
-  //           <table>
-  //             { matches.map(renderMatch) }
-  //           </table>
-  //         </ScrollView>
-  //       </Tab>)
+  //       return (
+  //         <Tab key={index} title={title}>
+  //           <ScrollView>
+  //             <table>
+  //               { matches.map(renderMatch) }
+  //             </table>
+  //           </ScrollView>
+  //         </Tab>
+  //       )
   //   }
   // }
-  //
+
   render() {
     return (
       <AppContainer>
         <Column>
-          <TopToolbar isConnected={this.state.isConnected} onSearch={this.performSearch} />
+          <TopToolbar />
           <Row>
-            <Column flex={9.0}>
-              <Row flex={10.0}>
-                <TabSet>
-                  { this.state.tabs.map(this.renderTab) }
-                </TabSet>
+            <Column style={{ flex: 9 }}>
+              <Row style={{ flex: 10 }}>
+                {/* <TabSet> */}
+                {/* { this.tabs.map(this.renderTab) } */}
+                {/* </TabSet> */}
               </Row>
               <Divider />
             </Column>
             <Divider vertical />
-            <Column flex={3.0}>
-              <UsersPanel users={this.state.users} />
+            <Column style={{ flex: 3 }}>
+              <UsersPanel />
               <Divider />
-              <RoomPanel rooms={this.state.rooms} onSelect={this.joinRoom} />
+              <RoomPanel />
             </Column>
           </Row>
           <TransfersPanel />
@@ -217,23 +234,5 @@ export default class App extends React.Component {
   //     })
   //     return this.state.manager.client.fileSearch(query, ticket)
   //   })
-  // }
-  //
-  // joinRoom = (room) => {
-  //   if (!this.state.joinedRooms.get(room.name)) {
-  //     return this.setState(state => ({
-  //       joinedRooms: state.joinedRooms.set(room.name, new Immutable.Record({
-  //         name: room.name,
-  //         messages: Immutable.List(),
-  //         users: Immutable.Map()
-  //       })())
-  //     }), () => {
-  //       this.pushTab({
-  //         type: 'chatroom',
-  //         name: room.name
-  //       })
-  //       return this.state.manager.client.joinRoom(room.name)
-  //     })
-  //   }
   // }
 }

@@ -8,9 +8,13 @@ const config = require(path.resolve('./webpack.config.js'))
 let mainWindow = null
 
 if (process.env.NODE_ENV === 'development') {
-  // config.entry.app.unshift('webpack-dev-server/client?http://localhost:8080/')
+  config.output.publicPath = 'http://localhost:8080/'
+  config.entry.unshift('react-hot-loader/patch')
+  config.entry.unshift('webpack-dev-server/client?http://localhost:8080/')
+  config.entry.unshift('webpack/hot/only-dev-server')
+
   const compiler = webpack(config)
-  const server = new WebpackDevServer(compiler)
+  const server = new WebpackDevServer(compiler, { hot: true })
   server.listen(8080)
 }
 

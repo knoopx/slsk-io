@@ -9,6 +9,10 @@ export default class TopToolbar extends React.Component {
     isConnected: React.PropTypes.bool
   }
 
+  static defaultProps = {
+    isConnected: false
+  }
+
   render() {
     return (<Toolbar>
       <Column>

@@ -1,22 +1,11 @@
 import Node from './node'
 import message from './message'
 
-/**
- * Peer constructor.
- */
-
-export default class Peer {
-  constructor(socket, options) {
-    Node.apply(this, arguments)
+export default class Peer extends Node {
+  constructor(socket) {
+    super()
     this.type = 'peer'
   }
-
-  /**
-   * Pierce firewall
-   *
-   * @param {Number} token
-   * @return {Peer}
-   */
 
   pierceFirewall(token) {
     message()
@@ -25,15 +14,6 @@ export default class Peer {
       .end(this.write.bind(this))
     return this
   }
-
-  /**
-   * Peer init.
-   *
-   * @param {String} localUsername
-   * @param {String} type
-   * @param {Number} token
-   * @return {Peer}
-   */
 
   peerInit(localUsername, type, token) {
     message()
@@ -45,22 +25,10 @@ export default class Peer {
     return this
   }
 
-  /**
-   * Shares request.
-   *
-   * @return {Peer}
-   */
-
   sharesRequest() {
     message(message.PEER.SHARES_REQUEST).end(this.write.bind(this))
     return this
   }
-
-  /**
-   * Info request.
-   *
-   * @return {Peer}
-   */
 
   infoRequest() {
     message()
@@ -69,9 +37,3 @@ export default class Peer {
     return this
   }
 }
-
-/**
- * Inherits from `Node`.
- */
-
-Peer.prototype.__proto__ = Node.prototype

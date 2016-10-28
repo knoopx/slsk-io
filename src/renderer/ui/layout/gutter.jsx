@@ -1,24 +1,17 @@
 import React from 'react'
 
-export default class extends React.Component {
-  static displayName = 'Gutter';
+export default class Gutter extends React.PureComponent {
+  static propTypes = {
+    size: React.PropTypes.number.isRequired
+  }
 
   static defaultProps = {
-    size: 10
-  };
-
-  state = {
-    size: this.props.size
-  };
-
-  getStyle = () => {
-    return {
-      width: `${this.state.size}px`,
-      display: 'inline-block'
-    }
-  };
+    size: 16
+  }
 
   render() {
-    return <div className="gutter" style={this.getStyle()} />
+    return (
+      <div style={{width: this.props.size}} />
+    )
   }
 }

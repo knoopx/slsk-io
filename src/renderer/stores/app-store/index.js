@@ -1,43 +1,32 @@
 
 import net from 'net'
-import util from 'util'
-import debugImport from 'debug'
+import { EventEmitter } from 'events'
+import { observable } from 'mobx'
 import Client from './client'
 import Peer from './peer'
 
-const inspect = util.inspect
-const debug = debugImport('nslsk:manager')
-import {EventEmitter} from 'events';
+export default class Manager extends EventEmitter {
+  @observable peers = {}
+  @observable tickets = {}
+  @observable searches = {}
+  @observable rooms = []
+  @observable users = []
 
-/**
- * Manager constructor.
- */
-
-export default class Manager {
   constructor(port) {
-    const self = this
-
-    EventEmitter.call(this)
-
+    super()
     this.port = port || 2234
-
     this.client = new Client()
-
-    this.peers = {}
-    this.tickets = {}
-    this.searches = {}
-
     this.client.on('connect', (client) => {
       let num = 0
-      self.peer = net.createServer((socket) => {
-        debug('[%s] connection from peer %s:%s', ++num, socket.remoteAddress, socket.remotePort)
+      this.peer = net.createServer((socket) => {
+        console.debug('[%s] connection from peer %s:%s', ++num, socket.remoteAddress, socket.remotePort)
         const peer = new Peer(socket)
         peer.infoRequest()
       })
-      self.peer.listen(self.port, () => {
-        debug('listening on port %s', self.port)
+      this.peer.listen(this.port, () => {
+        console.debug(`listening on port ${this.port}`)
       })
-      self.emit('connect', client)
+      this.emit('connect', client)
     })
 
     this.client.on('login', this.onLogin.bind(this))
@@ -46,17 +35,9 @@ export default class Manager {
     this.client.on('get status', this.onGetStatus.bind(this))
   }
 
-  /**
-   * @param {Message} message
-   */
-
   onLogin(message) {
     this.client.setListenPort(this.port)
   }
-
-  /**
-   * @param {Message} src/nslsk
-   */
 
   onPriviledgedUsers(message) {
     const client = this.client
@@ -65,15 +46,7 @@ export default class Manager {
     })
   }
 
-  /**
-   * @param {Message} message
-   */
-
   onGetStatus(message) {}
-
-  /**
-   * @param {Message} message
-   */
 
   onConnectToPeer(message) {
     const ip = message.ip
@@ -95,9 +68,3 @@ export default class Manager {
     })
   }
 }
-
-/**
- * Inherits from `EventEmitter`.
- */
-
-Manager.prototype.__proto__ = EventEmitter.prototype

@@ -1,23 +1,24 @@
 import React from 'react'
 
-export default class extends React.Component {
-  static displayName = 'Divider';
+import theme from '../theme'
 
-  getStyle = () => {
-    if ('vertical' in this.props) {
-      return {
-        borderRight: '1px solid #ccc',
-        flexBasis: '0'
-      }
-    } else {
-      return {
-        borderBottom: '1px solid #ccc',
-        flexBasis: '0'
-      }
-    }
-  };
+const styles = {
+  horizontal: { height: 1 },
+  vertical: { width: 1 }
+}
+
+export default class Divider extends React.PureComponent {
+  static propTypes = {
+    direction: React.PropTypes.oneOf(Object.keys(styles)).isRequired
+  }
+
+  static defaultProps = {
+    direction: 'horizontal'
+  }
 
   render() {
-    return <div className="divider" style={this.getStyle()} />
+    return (
+      <div style={{ backgroundColor: theme.borderColor, ...styles[this.props.direction] }} />
+    )
   }
 }
