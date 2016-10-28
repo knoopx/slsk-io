@@ -34,11 +34,9 @@ module.exports = React.createClass({
   },
   componentDidMount: function() {
     if (typeof module.onReload === "function") {
-      module.onReload((function(_this) {
-        return function() {
-          return window.previousAppState = _this.state;
-        };
-      })(this));
+      module.onReload(() => {
+        return window.previousAppState = this.state;
+      });
     }
     this.state.manager.on('connect', this.onConnected);
     this.state.manager.client.on('login', this.onLogin);
@@ -224,16 +222,14 @@ module.exports = React.createClass({
       return {
         searches: state.searches.set(ticket, Immutable.List())
       };
-    }, (function(_this) {
-      return function() {
-        _this.pushTab({
-          type: "search",
-          ticket: ticket,
-          query: query
-        });
-        return _this.state.manager.client.fileSearch(query, ticket);
-      };
-    })(this));
+    }, () => {
+      this.pushTab({
+        type: "search",
+        ticket: ticket,
+        query: query
+      });
+      return this.state.manager.client.fileSearch(query, ticket);
+    });
   },
   joinRoom: function(room) {
     if (!this.state.joinedRooms.get(room.name)) {
@@ -245,15 +241,13 @@ module.exports = React.createClass({
             users: Immutable.Map()
           })())
         };
-      }, (function(_this) {
-        return function() {
-          _this.pushTab({
-            type: "chatroom",
-            name: room.name
-          });
-          return _this.state.manager.client.joinRoom(room.name);
-        };
-      })(this));
+      }, () => {
+        this.pushTab({
+          type: "chatroom",
+          name: room.name
+        });
+        return this.state.manager.client.joinRoom(room.name);
+      });
     }
   }
 });

@@ -46,11 +46,9 @@ module.exports = React.createClass({
   renderItem: function(room) {
     return React.createElement(ListItem, {
       "key": room.name,
-      "onClick": ((function(_this) {
-        return function() {
-          return _this.props.onSelect(room);
-        };
-      })(this))
+      "onClick": (() => {
+        return this.props.onSelect(room);
+      })
     }, room.name, " (", room.users, ")");
   }
 });

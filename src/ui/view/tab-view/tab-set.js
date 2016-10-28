@@ -8,11 +8,9 @@ classNames = require("classnames");
 module.exports = React.createClass({
   displayName: "TabSet",
   componentDidMount: function() {
-    return typeof module.onReload === "function" ? module.onReload((function(_this) {
-      return function() {
-        return window.previousTabSetState = _this.state;
-      };
-    })(this)) : void 0;
+    return typeof module.onReload === "function" ? module.onReload(() => {
+      return window.previousTabSetState = this.state;
+    }) : void 0;
   },
   getInitialState: function() {
     return window.previousTabSetState || {
@@ -39,11 +37,9 @@ module.exports = React.createClass({
   renderTab: function(tab, index) {
     return React.createElement("a", {
       "key": index,
-      "onClick": ((function(_this) {
-        return function() {
-          return _this.setActiveIndex(index);
-        };
-      })(this)),
+      "onClick": (() => {
+        return this.setActiveIndex(index);
+      }),
       "className": classNames("tab-view-tab-set-tab", {
         active: this.state.activeIndex === index
       })
