@@ -4,8 +4,6 @@ export default class extends React.Component {
   static displayName = "ListItem";
 
   render() {
-    return React.createElement("div", Object.assign({
-      className: "list-item",
-    }, this.props));
+    return <div className="list-item" {...this.props} />;
   }
 };

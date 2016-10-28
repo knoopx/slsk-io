@@ -46,23 +46,14 @@ export default class extends React.Component {
   };
 
   render() {
-    return React.createElement(Column, null, React.createElement(Toolbar, null, "Rooms (", this.state.rooms.count(), ")"), React.createElement(ScrollView, null, React.createElement(List, null, this.state.rooms.sortBy(r => -r.users).map(this.renderItem))));
+    return <Column><Toolbar>Rooms ({this.state.rooms.count()})</Toolbar><ScrollView><List>{this.state.rooms.sortBy(r => -r.users).map(this.renderItem)}</List></ScrollView></Column>;
   }
 
   renderItem = (room) => {
-    return React.createElement(
-      ListItem,
-      {
-        key: room.name,
-
-        onClick: (() => {
-          return this.props.onSelect(room);
-        }),
-      },
-      room.name,
-      " (",
-      room.users,
-      ")",
-    );
+    return <ListItem
+      key={room.name}
+      onClick={() => {
+        return this.props.onSelect(room);
+      }}>{room.name} ({room.users})</ListItem>;
   };
 };

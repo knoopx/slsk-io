@@ -20,18 +20,6 @@ export default class extends React.Component {
   static displayName = "ScrollView";
 
   render() {
-    return React.createElement(
-      "div",
-      {
-        style: style.container,
-      },
-      React.createElement(
-        "div",
-        {
-          style: style.inner,
-        },
-        this.props.children,
-      ),
-    );
+    return <div style={style.container}><div style={style.inner}>{this.props.children}</div></div>;
   }
 };

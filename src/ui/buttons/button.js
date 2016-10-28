@@ -5,8 +5,6 @@ export default React.createClass({
   mixins: [require('react-addons-pure-render-mixin')],
 
   render() {
-    return React.createElement("div", Object.assign({
-      className: "btn btn-default",
-    }, this.props));
+    return <div className="btn btn-default" {...this.props} />;
   },
 });

@@ -27,40 +27,20 @@ export default class extends React.Component {
   };
 
   render() {
-    return React.createElement(
-      "div",
-      {
-        className: "tab-view",
-      },
-      React.createElement(
-        "div",
-        {
-          className: "tab-view-tab-set",
-        },
-        React.Children.map(this.props.children, this.renderTab),
-      ),
-      this.props.children[this.state.activeIndex],
-    );
+    return <div className="tab-view"><div className="tab-view-tab-set">{React.Children.map(this.props.children, this.renderTab)}</div>{this.props.children[this.state.activeIndex]}</div>;
   }
 
   renderTab = (tab, index) => {
-    return React.createElement(
-      "a",
-      {
-        key: index,
-
-        onClick: (() => {
-          return this.setActiveIndex(index);
-        }),
-
-        className: classNames(
-          "tab-view-tab-set-tab",
-          {
-            active: this.state.activeIndex === index,
-          },
-        ),
-      },
-      tab.props.title,
-    );
+    return <a
+      key={index}
+      onClick={() => {
+        return this.setActiveIndex(index);
+      }}
+      className={classNames(
+        "tab-view-tab-set-tab",
+        {
+          active: this.state.activeIndex === index,
+        },
+      )}>{tab.props.title}</a>;
   };
 };

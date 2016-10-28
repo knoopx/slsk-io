@@ -21,41 +21,7 @@ export default class extends React.Component {
   };
 
   render() {
-    return React.createElement(Toolbar, null, React.createElement(Column, null, React.createElement(
-      "div",
-      {
-        className: "input-group",
-      },
-      React.createElement(
-        "i",
-        {
-          className: "fa fa-search",
-        },
-      ),
-      React.createElement(Gutter, null),
-      React.createElement(
-        "input",
-        {
-          placeholder: "Search",
-          onKeyDown: this.onKeyDown,
-        },
-      ),
-    )), React.createElement(
-      Gutter,
-      {
-        size: 15.,
-      },
-    ), React.createElement(Button, null, (this.props.isConnected ? "Connected" : "Disconnected")), React.createElement(
-      Gutter,
-      {
-        size: 5.,
-      },
-    ), React.createElement(Button, null, React.createElement(
-      "i",
-      {
-        className: "fa fa-cog",
-      },
-    )));
+    return <Toolbar><Column><div className="input-group"><i className="fa fa-search" /><Gutter /><input placeholder="Search" onKeyDown={this.onKeyDown} /></div></Column><Gutter size={15.} /><Button>{this.props.isConnected ? "Connected" : "Disconnected"}</Button><Gutter size={5.} /><Button><i className="fa fa-cog" /></Button></Toolbar>;
   }
 
   onKeyDown = (e) => {

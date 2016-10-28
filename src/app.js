@@ -74,134 +74,24 @@ export default class extends React.Component {
       case "chatroom":
         const room = this.state.joinedRooms.get(props.name);
 
-        var title = React.createElement(Row, null, React.createElement(
-          "i",
-          {
-            className: "fa fa-hashtag",
-          },
-        ), React.createElement(Gutter, null), React.createElement("i", null), React.createElement("span", null, room.name, " (", room.users.count(), ")"));
+        var title = <Row><i className="fa fa-hashtag" /><Gutter /><i /><span>{room.name} ({room.users.count()})</span></Row>;
 
-        return React.createElement(
-          Tab,
-          {
-            key: index,
-            title,
-          },
-          React.createElement(Row, null, React.createElement(
-            Column,
-            {
-              flex: "3",
-            },
-            React.createElement(ScrollView, null, React.createElement(List, null, room.users.sortBy(u => u.user).map(user => React.createElement(
-              ListItem,
-              {
-                key: user.user,
-              },
-              React.createElement("span", null, React.createElement("strong", null, user.user), React.createElement("br", null), React.createElement(
-                "small",
-                {
-                  className: "text-muted",
-                },
-                user.tickers,
-              )),
-            )))),
-          ), React.createElement(
-            Divider,
-            {
-              vertical: true,
-            },
-          ), React.createElement(
-            Column,
-            {
-              flex: "9",
-            },
-            React.createElement(ScrollView, null, React.createElement(
-              Chat,
-              {
-                messages: room.messages,
-              },
-            )),
-          )),
-        );
+        return <Tab key={index} title={title}><Row><Column flex="3"><ScrollView><List>{room.users.sortBy(u => u.user).map(user => <ListItem key={user.user}><span><strong>{user.user}</strong><br /><small className="text-muted">{user.tickers}</small></span></ListItem>)}</List></ScrollView></Column><Divider vertical={true} /><Column flex="9"><ScrollView><Chat messages={room.messages} /></ScrollView></Column></Row></Tab>;
       case "search":
         const matches = this.state.searches.get(props.ticket);
 
         const renderMatch = function(match, index) {
-          return match.results.map((r, index) => React.createElement(
-            "tr",
-            {
-              key: index,
-            },
-            React.createElement("td", null, React.createElement("strong", null, match.user)),
-            React.createElement("td", null, Path.basename(r.filename.replace(/\\/g, "/"))),
-            React.createElement("td", null, Path.dirname(r.filename.replace(/\\/g, "/"))),
-            React.createElement("td", null, r.size),
-          ));
+          return match.results.map((r, index) => <tr key={index}><td><strong>{match.user}</strong></td><td>{Path.basename(r.filename.replace(/\\/g, "/"))}</td><td>{Path.dirname(r.filename.replace(/\\/g, "/"))}</td><td>{r.size}</td></tr>);
         };
 
-        var title = React.createElement(Row, null, React.createElement(
-          "i",
-          {
-            className: "fa fa-search",
-          },
-        ), React.createElement(Gutter, null), React.createElement("span", null, props.query, " (", matches.map(m => m.results.length).toArray().sum(), ")"));
+        var title = <Row><i className="fa fa-search" /><Gutter /><span>{props.query} ({matches.map(m => m.results.length).toArray().sum()})</span></Row>;
 
-        return React.createElement(
-          Tab,
-          {
-            key: index,
-            title,
-          },
-          React.createElement(ScrollView, null, React.createElement("table", null, matches.map(renderMatch))),
-        );
+        return <Tab key={index} title={title}><ScrollView><table>{matches.map(renderMatch)}</table></ScrollView></Tab>;
     }
   };
 
   render() {
-    return React.createElement(Column, null, React.createElement(
-      TopToolbar,
-      {
-        isConnected: this.state.isConnected,
-        onSearch: this.performSearch,
-      },
-    ), React.createElement(Row, null, React.createElement(
-      Column,
-      {
-        flex: 9.,
-      },
-      React.createElement(
-        Row,
-        {
-          flex: 10.,
-        },
-        React.createElement(TabSet, null, this.state.tabs.map(this.renderTab)),
-      ),
-      React.createElement(Divider, null),
-    ), React.createElement(
-      Divider,
-      {
-        vertical: true,
-      },
-    ), React.createElement(
-      Column,
-      {
-        flex: 3.,
-      },
-      React.createElement(
-        UsersPanel,
-        {
-          users: this.state.users,
-        },
-      ),
-      React.createElement(Divider, null),
-      React.createElement(
-        RoomPanel,
-        {
-          rooms: this.state.rooms,
-          onSelect: this.joinRoom,
-        },
-      ),
-    )), React.createElement(TransfersPanel, null));
+    return <Column><TopToolbar isConnected={this.state.isConnected} onSearch={this.performSearch} /><Row><Column flex={9.}><Row flex={10.}><TabSet>{this.state.tabs.map(this.renderTab)}</TabSet></Row><Divider /></Column><Divider vertical={true} /><Column flex={3.}><UsersPanel users={this.state.users} /><Divider /><RoomPanel rooms={this.state.rooms} onSelect={this.joinRoom} /></Column></Row><TransfersPanel /></Column>;
   }
 
   onConnected = (client) => {

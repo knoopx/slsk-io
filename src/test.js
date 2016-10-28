@@ -6,6 +6,6 @@ export default class extends React.Component {
   state = this.props.state;
 
   render() {
-    return React.createElement("div", null, this.state.value);
+    return <div>{this.state.value}</div>;
   }
 };

@@ -19,12 +19,6 @@ export default React.createClass({
   },
 
   render() {
-    return React.createElement(
-      "div",
-      {
-        className: "divider",
-        style: this.getStyle(),
-      },
-    );
+    return <div className="divider" style={this.getStyle()} />;
   },
 });

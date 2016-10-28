@@ -5,8 +5,6 @@ export default class extends React.Component {
   static displayName = "Toolbar";
 
   render() {
-    return React.createElement(Row, Object.assign({
-      className: "toolbar",
-    }, this.props));
+    return <Row className="toolbar" {...this.props} />;
   }
 };

@@ -16,19 +16,6 @@ export default class extends React.Component {
   static displayName = "TransfersPanel";
 
   render() {
-    return React.createElement(
-      Row,
-      {
-        flex: 2.,
-      },
-      React.createElement(Column, null, React.createElement(Toolbar, null, "Downloads")),
-      React.createElement(
-        Divider,
-        {
-          vertical: true,
-        },
-      ),
-      React.createElement(Column, null, React.createElement(Toolbar, null, "Uploads")),
-    );
+    return <Row flex={2.}><Column><Toolbar>Downloads</Toolbar></Column><Divider vertical={true} /><Column><Toolbar>Uploads</Toolbar></Column></Row>;
   }
 };

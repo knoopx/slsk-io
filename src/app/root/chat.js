@@ -22,32 +22,14 @@ export default class extends React.Component {
   static displayName = "Chat";
 
   render() {
-    return React.createElement(List, null, this.props.messages.map(this.renderMessage));
+    return <List>{this.props.messages.map(this.renderMessage)}</List>;
   }
 
   renderMessage = (message, index) => {
-    return React.createElement(
-      ListItem,
-      {
-        key: index,
-      },
-      React.createElement(Row, null, React.createElement(
-        Column,
-        {
-          flex: "2",
-
-          style: {
+    return <ListItem key={index}><Row><Column
+          flex="2"
+          style={{
             textAlign: "right",
-          },
-        },
-        React.createElement("strong", null, message.username),
-      ), React.createElement(Gutter, null), React.createElement(
-        Column,
-        {
-          flex: "10",
-        },
-        message.message,
-      )),
-    );
+          }}><strong>{message.username}</strong></Column><Gutter /><Column flex="10">{message.message}</Column></Row></ListItem>;
   };
 };
