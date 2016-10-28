@@ -1,9 +1,5 @@
 
-/**
- * Module dependencies.
- */
-
-var crypto = require('crypto');
+import crypto from 'crypto';
 
 /**
  * Generates MD5 hash by given string.

@@ -1,4 +1,4 @@
-var React = require("react");
+import React from "react";
 var Row = require("./layout").Row;
 
 export default React.createClass({

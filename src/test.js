@@ -1,5 +1,5 @@
-var React = require("react");
-var Immutable = require("immutable");
+import React from "react";
+import Immutable from "immutable";
 
 export default React.createClass({
   displayName: "Test",

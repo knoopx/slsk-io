@@ -1,4 +1,4 @@
-var Immutable = require("immutable");
+import Immutable from "immutable";
 var Manager = window.require("../src/nslsk/manager");
 
 export default {

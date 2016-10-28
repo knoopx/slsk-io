@@ -1,11 +1,9 @@
-require("sugar");
-
-require("source-map-support/register");
-
-var React = require("react");
-var ReactDOM = require("react-dom");
-var App = require("./app");
-var state = require("./state");
+import "sugar";
+import "source-map-support/register";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./app";
+import state from "./state";
 
 var app = React.createElement(App, {
   state: state
